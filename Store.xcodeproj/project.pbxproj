@@ -12,7 +12,29 @@
 		EECFF10822869A8500CC0DE6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EECFF10622869A8500CC0DE6 /* Main.storyboard */; };
 		EECFF10A22869A8700CC0DE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EECFF10922869A8700CC0DE6 /* Assets.xcassets */; };
 		EECFF10D22869A8700CC0DE6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EECFF10B22869A8700CC0DE6 /* LaunchScreen.storyboard */; };
+		EECFF1172286A4E400CC0DE6 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EECFF1142286A4E300CC0DE6 /* Alamofire.framework */; };
+		EECFF1182286A4E400CC0DE6 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EECFF1142286A4E300CC0DE6 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EECFF1192286A4E400CC0DE6 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EECFF1152286A4E300CC0DE6 /* Kingfisher.framework */; };
+		EECFF11A2286A4E400CC0DE6 /* Kingfisher.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EECFF1152286A4E300CC0DE6 /* Kingfisher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EECFF11B2286A4E400CC0DE6 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EECFF1162286A4E400CC0DE6 /* SnapKit.framework */; };
+		EECFF11C2286A4E400CC0DE6 /* SnapKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EECFF1162286A4E400CC0DE6 /* SnapKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		EECFF11D2286A4E400CC0DE6 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				EECFF11C2286A4E400CC0DE6 /* SnapKit.framework in Embed Frameworks */,
+				EECFF11A2286A4E400CC0DE6 /* Kingfisher.framework in Embed Frameworks */,
+				EECFF1182286A4E400CC0DE6 /* Alamofire.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		EECFF0FF22869A8500CC0DE6 /* Store.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Store.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -22,6 +44,9 @@
 		EECFF10922869A8700CC0DE6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EECFF10C22869A8700CC0DE6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EECFF10E22869A8700CC0DE6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EECFF1142286A4E300CC0DE6 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		EECFF1152286A4E300CC0DE6 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
+		EECFF1162286A4E400CC0DE6 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +54,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EECFF11B2286A4E400CC0DE6 /* SnapKit.framework in Frameworks */,
+				EECFF1192286A4E400CC0DE6 /* Kingfisher.framework in Frameworks */,
+				EECFF1172286A4E400CC0DE6 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -38,6 +66,9 @@
 		EECFF0F622869A8500CC0DE6 = {
 			isa = PBXGroup;
 			children = (
+				EECFF1142286A4E300CC0DE6 /* Alamofire.framework */,
+				EECFF1152286A4E300CC0DE6 /* Kingfisher.framework */,
+				EECFF1162286A4E400CC0DE6 /* SnapKit.framework */,
 				EECFF10122869A8500CC0DE6 /* Store */,
 				EECFF10022869A8500CC0DE6 /* Products */,
 			);
@@ -74,6 +105,8 @@
 				EECFF0FB22869A8500CC0DE6 /* Sources */,
 				EECFF0FC22869A8500CC0DE6 /* Frameworks */,
 				EECFF0FD22869A8500CC0DE6 /* Resources */,
+				EECFF11D2286A4E400CC0DE6 /* Embed Frameworks */,
+				EECFF11E2286A4EA00CC0DE6 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -129,6 +162,29 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		EECFF11E2286A4EA00CC0DE6 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		EECFF0FB22869A8500CC0DE6 /* Sources */ = {
@@ -284,6 +340,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GQ2YK62N76;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Store/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -302,6 +362,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GQ2YK62N76;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Store/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
