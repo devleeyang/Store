@@ -18,6 +18,9 @@
 		EECFF11A2286A4E400CC0DE6 /* Kingfisher.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EECFF1152286A4E300CC0DE6 /* Kingfisher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EECFF11B2286A4E400CC0DE6 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EECFF1162286A4E400CC0DE6 /* SnapKit.framework */; };
 		EECFF11C2286A4E400CC0DE6 /* SnapKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EECFF1162286A4E400CC0DE6 /* SnapKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EECFF1212286BB4900CC0DE6 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECFF1202286BB4900CC0DE6 /* NetworkManager.swift */; };
+		EECFF1242286BBBF00CC0DE6 /* SearchStoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECFF1232286BBBF00CC0DE6 /* SearchStoreModel.swift */; };
+		EECFF1262286D03300CC0DE6 /* SearchError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECFF1252286D03300CC0DE6 /* SearchError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -47,6 +50,9 @@
 		EECFF1142286A4E300CC0DE6 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		EECFF1152286A4E300CC0DE6 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
 		EECFF1162286A4E400CC0DE6 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
+		EECFF1202286BB4900CC0DE6 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		EECFF1232286BBBF00CC0DE6 /* SearchStoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStoreModel.swift; sourceTree = "<group>"; };
+		EECFF1252286D03300CC0DE6 /* SearchError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +92,8 @@
 			isa = PBXGroup;
 			children = (
 				EECFF10222869A8500CC0DE6 /* AppDelegate.swift */,
+				EECFF11F2286A8CA00CC0DE6 /* Network */,
+				EECFF1222286BB8D00CC0DE6 /* Model */,
 				EECFF10422869A8500CC0DE6 /* ViewController.swift */,
 				EECFF10622869A8500CC0DE6 /* Main.storyboard */,
 				EECFF10922869A8700CC0DE6 /* Assets.xcassets */,
@@ -93,6 +101,23 @@
 				EECFF10E22869A8700CC0DE6 /* Info.plist */,
 			);
 			path = Store;
+			sourceTree = "<group>";
+		};
+		EECFF11F2286A8CA00CC0DE6 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				EECFF1202286BB4900CC0DE6 /* NetworkManager.swift */,
+				EECFF1252286D03300CC0DE6 /* SearchError.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		EECFF1222286BB8D00CC0DE6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EECFF1232286BBBF00CC0DE6 /* SearchStoreModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -191,6 +216,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EECFF1212286BB4900CC0DE6 /* NetworkManager.swift in Sources */,
+				EECFF1262286D03300CC0DE6 /* SearchError.swift in Sources */,
+				EECFF1242286BBBF00CC0DE6 /* SearchStoreModel.swift in Sources */,
 				EECFF10522869A8500CC0DE6 /* ViewController.swift in Sources */,
 				EECFF10322869A8500CC0DE6 /* AppDelegate.swift in Sources */,
 			);
