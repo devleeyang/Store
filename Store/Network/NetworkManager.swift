@@ -19,7 +19,7 @@ class NetworkManager {
                         return StoreInfo(screenshotUrls: store.screenshotUrls, trackViewUrl: store.trackViewURL, description: store.description, trackName: store.trackName, formattedPrice: store.formattedPrice, genres: store.genres, trackContentRating: store.trackContentRating, sellerName: store.sellerName, releaseNotes: store.releaseNotes, version: store.version, averageUserRating: store.averageUserRating, price: store.price, fileSizeBytes: store.fileSizeBytes, artworkUrl512: store.artworkUrl512)
                     }
                     guard storeList.count != 0 else {
-                        return onFailure(SearchError.notDecoder("이미지 정보를 찾을 수 없습니다."))
+                        return onFailure(SearchError.notDecoder("스토어 정보를 찾을 수 없습니다."))
                     }
                     onSuccess(storeList)
                 } catch {

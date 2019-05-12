@@ -43,6 +43,7 @@ struct Result: Codable {
 enum Rating: String, Codable {
     case the12 = "12+"
     case the17 = "17+"
+    case the9 = "9+"
     case the4 = "4+"
 }
 
