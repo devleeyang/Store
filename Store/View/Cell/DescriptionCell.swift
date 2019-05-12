@@ -10,8 +10,11 @@ import UIKit
 
 class DescriptionCell: UITableViewCell {
 
+    @IBOutlet weak var descriptionLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
+        descriptionLabel.textColor = .black
+        descriptionLabel.font = .systemFont(ofSize: 15.0)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -10,6 +10,7 @@ import UIKit
 
 class CategoryCell: UITableViewCell {
 
+    @IBOutlet weak var labelStackView: UIStackView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
