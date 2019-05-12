@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import Kingfisher
 
 class DetailStoreInfoViewController: UIViewController {
 
     var detailStoreInfo: StoreInfo?
     private let mainCellId = "DetailMainCell"
+    private let collectionCellId = "StoreCollectionCell"
     @IBOutlet weak var detailView: UITableView!
     
     override func viewDidLoad() {
@@ -31,6 +33,8 @@ extension DetailStoreInfoViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: DetailMainCell = detailView.dequeueReusableCell(withIdentifier: mainCellId, for: indexPath) as! DetailMainCell
         cell.datailStore = detailStoreInfo
+        cell.imageCollection.dataSource = self
+        cell.imageCollection.register(UINib(nibName: collectionCellId, bundle: nil), forCellWithReuseIdentifier: collectionCellId)
         cell.selectionStyle = .none
         return cell
     }
@@ -43,3 +47,15 @@ extension DetailStoreInfoViewController: UITableViewDelegate {
     }
 }
 
+extension DetailStoreInfoViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return detailStoreInfo?.screenshotUrls.count ?? 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionCellId, for: indexPath) as! StoreCollectionCell
+        let resource = ImageResource(downloadURL: URL(string: detailStoreInfo?.screenshotUrls[indexPath.row] ?? "")!, cacheKey: detailStoreInfo?.screenshotUrls[indexPath.row])
+        cell.storeImageView.kf.setImage(with: resource)
+        return cell
+    }
+}

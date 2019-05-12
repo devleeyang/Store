@@ -19,15 +19,4 @@ extension UIView {
         maskLayer1.path = maskPAth1.cgPath
         self.layer.mask = maskLayer1
     }
-    
-    func roundedCorners(left: Bool){
-        let corners:UIRectCorner = (left ? [.topLeft , .bottomLeft] : [.topRight , .bottomRight])
-        let maskPAth1 = UIBezierPath(roundedRect:self.bounds,
-                                     byRoundingCorners: corners,
-                                     cornerRadii:CGSize(width:4.0, height:4.0))
-        let maskLayer1 = CAShapeLayer()
-        maskLayer1.frame = self.bounds
-        maskLayer1.path = maskPAth1.cgPath
-        self.layer.mask = maskLayer1
-    }
 }

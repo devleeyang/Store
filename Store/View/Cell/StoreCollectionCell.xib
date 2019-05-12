@@ -20,16 +20,15 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QoY-fK-Y0J">
-                        <rect key="frame" x="31.5" y="0.0" width="204" height="434"/>
+                        <rect key="frame" x="0.0" y="0.0" width="267" height="434"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fIq-xe-0vP">
-                                <rect key="frame" x="0.0" y="0.0" width="204" height="434"/>
+                                <rect key="frame" x="0.0" y="0.0" width="267" height="434"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="fIq-xe-0vP" firstAttribute="height" secondItem="QoY-fK-Y0J" secondAttribute="height" id="6oE-cA-khO"/>
-                            <constraint firstAttribute="width" secondItem="QoY-fK-Y0J" secondAttribute="height" multiplier="8:17" id="HIm-kh-B6V"/>
                             <constraint firstItem="fIq-xe-0vP" firstAttribute="centerY" secondItem="c40-ya-L8A" secondAttribute="centerY" id="P44-dI-XDJ"/>
                             <constraint firstItem="fIq-xe-0vP" firstAttribute="centerX" secondItem="c40-ya-L8A" secondAttribute="centerX" id="s27-h6-unF"/>
                             <constraint firstItem="fIq-xe-0vP" firstAttribute="width" secondItem="QoY-fK-Y0J" secondAttribute="width" id="v1e-I7-5ZF"/>
@@ -39,9 +38,11 @@
                 </subviews>
             </view>
             <constraints>
+                <constraint firstItem="QoY-fK-Y0J" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" id="AGf-C6-J1J"/>
                 <constraint firstItem="QoY-fK-Y0J" firstAttribute="top" secondItem="ZTg-uK-7eu" secondAttribute="top" id="Rai-rD-6j9"/>
                 <constraint firstItem="ZTg-uK-7eu" firstAttribute="bottom" secondItem="QoY-fK-Y0J" secondAttribute="bottom" id="hfu-Ww-Omh"/>
                 <constraint firstItem="QoY-fK-Y0J" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="i91-kd-sNP"/>
+                <constraint firstItem="QoY-fK-Y0J" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" id="n9y-ZX-78H"/>
                 <constraint firstItem="QoY-fK-Y0J" firstAttribute="centerY" secondItem="ZTg-uK-7eu" secondAttribute="centerY" id="wz4-SQ-S8v"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
