@@ -105,7 +105,12 @@ extension DetailStoreInfoViewController: UITableViewDataSource {
             cell.backgroundColor = UIColor(red: 242.0/255.0, green: 242.0/255.0, blue: 242.0/255.0, alpha:1.0)
             return cell
         }
- 
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 && indexPath.row == 3 {
+            detailView.reloadRows(at: [indexPath], with: .bottom)
+        }
     }
 }
 
