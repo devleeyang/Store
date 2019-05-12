@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Main List View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Store" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainListViewController" id="BYZ-38-t0r" customClass="MainListViewController" customModule="Store" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -22,9 +22,9 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
-                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="heI-Pg-ih2"/>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="w5i-JM-xs8"/>
-                                    <outlet property="prefetchDataSource" destination="BYZ-38-t0r" id="qnE-D3-ADW"/>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="n7h-VC-aIu"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="4cp-m9-F8O"/>
+                                    <outlet property="prefetchDataSource" destination="BYZ-38-t0r" id="3xa-HI-UpX"/>
                                 </connections>
                             </tableView>
                         </subviews>
@@ -39,7 +39,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="rS1-br-MBA"/>
                     <connections>
-                        <outlet property="storeView" destination="69h-VQ-w0P" id="nDh-cr-8Sw"/>
+                        <outlet property="storeView" destination="69h-VQ-w0P" id="vGS-GR-KKq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
