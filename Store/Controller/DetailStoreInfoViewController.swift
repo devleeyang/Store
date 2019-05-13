@@ -19,7 +19,7 @@ class DetailStoreInfoViewController: UIViewController {
     private let categoryCellId = "CategoryCell"
     private var isMore: Bool = false
     private var isDescription: Bool = false
-    
+    private var inputList: Array<CategoryLabel> = Array<CategoryLabel>()
     @IBOutlet weak var detailView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
