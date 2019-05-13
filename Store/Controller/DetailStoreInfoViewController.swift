@@ -41,9 +41,9 @@ extension DetailStoreInfoViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return 6
+            return 5
         case 1:
-            return 2
+            return 1
         default:
             return 0
         }
@@ -101,8 +101,7 @@ extension DetailStoreInfoViewController: UITableViewDataSource {
             }
             return cell
         default:
-            let cell = UITableViewCell(frame: CGRect(x: 0, y: 0, width: view.bounds.size.width, height: 10))
-            cell.backgroundColor = UIColor(red: 242.0/255.0, green: 242.0/255.0, blue: 242.0/255.0, alpha:1.0)
+            let cell = UITableViewCell()
             return cell
         }
     }
@@ -110,6 +109,9 @@ extension DetailStoreInfoViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 && indexPath.row == 3 {
             detailView.reloadRows(at: [indexPath], with: .bottom)
+//            UITableViewCell *cell = [ cellForRowAtIndexPath:indexPath];
+            let cell = detailView.cellForRow(at: indexPath) as! DetailBottomCell
+            cell.arrow.isHighlighted = !cell.arrow.isHighlighted
         }
     }
 }
@@ -118,6 +120,38 @@ extension DetailStoreInfoViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if (section == 1) {
+            return 20
+        }
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if (section == 1) {
+            return 20
+        }
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if (section == 1) {
+            let headerView: UIView = UIView()
+            headerView.backgroundColor = UIColor(red: 242.0/255.0, green: 242.0/255.0, blue: 242.0/255.0, alpha:1.0)
+            return headerView
+        }
+        return nil
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        if (section == 1) {
+            let footerView: UIView = UIView()
+            footerView.backgroundColor = UIColor(red: 242.0/255.0, green: 242.0/255.0, blue: 242.0/255.0, alpha:1.0)
+            return footerView
+        }
+        return nil
     }
 }
 

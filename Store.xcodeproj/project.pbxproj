@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD98395C228969F000E4C3BB /* CALayer+border.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD98395B228969F000E4C3BB /* CALayer+border.swift */; };
 		EE83E3432287E70100CAADB0 /* DetailBottomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE83E3412287E70100CAADB0 /* DetailBottomCell.swift */; };
 		EE83E3442287E70100CAADB0 /* DetailBottomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE83E3422287E70100CAADB0 /* DetailBottomCell.xib */; };
 		EE83E3462287EA0F00CAADB0 /* MGStarRatingView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE83E3452287EA0F00CAADB0 /* MGStarRatingView.framework */; };
@@ -58,6 +59,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CD98395B228969F000E4C3BB /* CALayer+border.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+border.swift"; sourceTree = "<group>"; };
 		EE83E3412287E70100CAADB0 /* DetailBottomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailBottomCell.swift; sourceTree = "<group>"; };
 		EE83E3422287E70100CAADB0 /* DetailBottomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailBottomCell.xib; sourceTree = "<group>"; };
 		EE83E3452287EA0F00CAADB0 /* MGStarRatingView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MGStarRatingView.framework; path = Carthage/Build/iOS/MGStarRatingView.framework; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				EE83E35322881CBF00CAADB0 /* UIView+Round.swift */,
+				CD98395B228969F000E4C3BB /* CALayer+border.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -283,15 +286,11 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/MGStarRatingView.framework",
-			);
-			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
@@ -307,6 +306,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EEA2707B228730CC00ED7F23 /* DetailMainCell.swift in Sources */,
+				CD98395C228969F000E4C3BB /* CALayer+border.swift in Sources */,
 				EE83E3432287E70100CAADB0 /* DetailBottomCell.swift in Sources */,
 				EE83E34A2287F0A600CAADB0 /* DescriptionCell.swift in Sources */,
 				EECFF15C22872A3600CC0DE6 /* MainListCell.swift in Sources */,
@@ -403,6 +403,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -457,6 +458,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 4.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -472,6 +474,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = Store/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -494,6 +497,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = Store/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -16,7 +16,7 @@ class DetailMainCell: UITableViewCell {
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var webBtn: UIButton!
     @IBOutlet weak var shareBtn: UIButton!
-    @IBOutlet weak var buttonStackView: UIStackView!
+    @IBOutlet weak var buttonBackView: UIView!
     
     var datailStore: StoreInfo? {
         didSet {
@@ -32,13 +32,13 @@ class DetailMainCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-//        webBtn.layer.borderColor = UIColor(red: 161.0/255.0, green: 161.0/255.0, blue: 161.0/255.0, alpha:1.0).cgColor
-//        webBtn.layer.borderWidth = 1.0
+        
         webBtn.titleLabel?.textColor = .black
         webBtn.titleLabel?.font = .systemFont(ofSize: 14.0)
-        
+    
         shareBtn.titleLabel?.textColor = .black
         shareBtn.titleLabel?.font = .systemFont(ofSize: 14.0)
+        shareBtn.layer.addBorder(edge: .left, color: UIColor(red: 161.0/255.0, green: 161.0/255.0, blue: 161.0/255.0, alpha:1.0), thickness: 1.0)
         
         appNameLabel.textColor = .black
         appNameLabel.font = .boldSystemFont(ofSize: 21.0)
@@ -49,8 +49,9 @@ class DetailMainCell: UITableViewCell {
         priceLabel.textColor = .black
         priceLabel.font = .boldSystemFont(ofSize: 18.0)
         
-        buttonStackView.layer.borderWidth = 1.0
-        buttonStackView.layer.borderColor = UIColor(red: 161.0/255.0, green: 161.0/255.0, blue: 161.0/255.0, alpha:1.0).cgColor
+        buttonBackView.layer.borderWidth = 1.0
+        buttonBackView.layer.borderColor = UIColor(red: 161.0/255.0, green: 161.0/255.0, blue: 161.0/255.0, alpha:1.0).cgColor
+        buttonBackView.layer.cornerRadius = 4
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
