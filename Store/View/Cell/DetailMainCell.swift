@@ -66,10 +66,4 @@ class DetailMainCell: UITableViewCell {
         webBtn.titleLabel?.text = "웹에서 보기"
         shareBtn.titleLabel?.text = "공유하기"
     }
-    
-    @IBAction func pressedWebButton(_ sender: UIButton) {
-    }
-    
-    @IBAction func pressedShareButton(_ sender: UIButton) {
-    }
 }

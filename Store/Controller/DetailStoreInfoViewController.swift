@@ -8,6 +8,7 @@
 
 import UIKit
 import Kingfisher
+import SafariServices
 
 class DetailStoreInfoViewController: UIViewController {
 
@@ -29,6 +30,24 @@ class DetailStoreInfoViewController: UIViewController {
         detailView.register(UINib(nibName: categoryCellId, bundle: nil), forCellReuseIdentifier: categoryCellId)
         detailView.backgroundColor = UIColor(red: 242.0/255.0, green: 242.0/255.0, blue: 242.0/255.0, alpha:1.0)
         detailView.separatorColor = .clear
+    }
+    
+    @objc func pressedWebButton(_ sender: UIButton) {
+        guard
+            let urlString = detailStoreInfo?.trackViewUrl,
+            let url = URL(string: urlString)
+            else { return }
+        
+        let safariViewController = SFSafariViewController(url: url)
+        present(safariViewController, animated: true, completion: nil)
+    }
+    
+    @objc func pressedShareButton(_ sender: UIButton) {
+        if let text = detailStoreInfo?.trackViewUrl {
+            let textShare = [text]
+            let activityVC = UIActivityViewController(activityItems: textShare, applicationActivities: nil)
+            self.present(activityVC, animated: true, completion: nil)
+        }
     }
     
 }
@@ -64,6 +83,8 @@ extension DetailStoreInfoViewController: UITableViewDataSource {
             cell.datailStore = detailStoreInfo
             cell.imageCollection.dataSource = self
             cell.imageCollection.register(UINib(nibName: collectionCellId, bundle: nil), forCellWithReuseIdentifier: collectionCellId)
+            cell.webBtn.addTarget(self, action: #selector(pressedWebButton), for: .touchUpInside)
+            cell.shareBtn.addTarget(self, action: #selector(pressedShareButton), for: .touchUpInside)
             cell.selectionStyle = .none
             return cell
         case (0,1):
