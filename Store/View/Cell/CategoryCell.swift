@@ -23,4 +23,11 @@ class CategoryCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        for view in labelViews.subviews{
+            view.removeFromSuperview()
+        }
+        labelHeight.constant = 40
+    }
 }

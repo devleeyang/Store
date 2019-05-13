@@ -110,16 +110,37 @@ extension DetailStoreInfoViewController: UITableViewDataSource {
             let cell: CategoryCell = detailView.dequeueReusableCell(withIdentifier: categoryCellId, for: indexPath) as! CategoryCell
             cell.selectionStyle = .none
          
-//            guard let info = detailStoreInfo,
-//                cell.labelStackView.subviews.count == 0 else {
-//                return cell
-//            }
-//            
-//            for text in info.genres {
-//                let label: CategoryLabel = CategoryLabel()
-//                label.text = "\n  #\(text)  \n"
-//                cell.labelStackView.addArrangedSubview(label)
-//            }
+            guard let info = detailStoreInfo else {
+                return cell
+            }
+            inputList.removeAll()
+            for text in info.genres {
+                let label: CategoryLabel = CategoryLabel()
+                label.text = "#\(text)"
+                label.sizeToFit()
+                label.frame = CGRect(x: label.frame.origin.x, y: label.frame.origin.y, width: label.frame.size.width + 10, height: label.frame.size.height + 10)
+                
+                if inputList.count == 0 {
+                    label.frame.origin = CGPoint(x: 10, y: 0)
+                } else {
+                    let labelX = inputList[inputList.count - 1].frame.origin.x + inputList[inputList.count - 1].frame.width + 8
+                    if (cell.labelViews.frame.size.width < labelX + label.frame.size.width)
+                    {
+                        label.frame.origin.x = cell.labelViews.frame.origin.x
+                        label.frame.origin.y = inputList[inputList.count - 1].frame.origin.y + inputList[inputList.count - 1].frame.height + 8
+                    } else {
+                        label.frame.origin.x = labelX
+                        label.frame.origin.y = inputList[inputList.count - 1].frame.origin.y
+                    }
+                }
+                
+                let labelY = label.frame.origin.y + label.frame.size.height + 20
+                cell.labelHeight.constant = labelY
+                cell.labelViews.updateConstraints()
+                cell.labelViews.addSubview(label)
+                inputList.append(label)
+            }
+            
             return cell
         default:
             let cell = UITableViewCell()
