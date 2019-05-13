@@ -91,7 +91,11 @@ extension DetailStoreInfoViewController: UITableViewDataSource {
             let cell: DetailBottomCell = detailView.dequeueReusableCell(withIdentifier: bottomCellId, for: indexPath) as! DetailBottomCell
             cell.leftLabel.text = "크기"
             cell.arrow.alpha = 0
-            cell.rightLabel.text = detailStoreInfo?.fileSizeBytes
+            let convertSize = Int(detailStoreInfo?.fileSizeBytes ?? "0")
+            if let size = convertSize {
+                let sizeText = size / 1024 / 1024 > 0 ? "\(size / 1024 / 1024)MB" : "\(size / 1024)KB"
+                cell.rightLabel.text = sizeText
+            }
             cell.selectionStyle = .none
             return cell
         case (0,2):
