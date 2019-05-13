@@ -17,9 +17,10 @@ class DetailStoreInfoViewController: UIViewController {
     private let bottomCellId = "DetailBottomCell"
     private let descriptionCellId = "DescriptionCell"
     private let categoryCellId = "CategoryCell"
+    private var isMore: Bool = false
+    private var isDescription: Bool = false
     
     @IBOutlet weak var detailView: UITableView!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         detailView.register(UINib(nibName: mainCellId, bundle: nil), forCellReuseIdentifier: mainCellId)
@@ -35,14 +36,19 @@ class DetailStoreInfoViewController: UIViewController {
 extension DetailStoreInfoViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return 5
+            if isMore {
+                return 5
+            }
+            return 4
         case 1:
+            return 1
+        case 2:
             return 1
         default:
             return 0
@@ -82,23 +88,38 @@ extension DetailStoreInfoViewController: UITableViewDataSource {
             return cell
         case (0,4):
             let cell: DescriptionCell = detailView.dequeueReusableCell(withIdentifier: descriptionCellId, for: indexPath) as! DescriptionCell
-            cell.descriptionLabel.text = detailStoreInfo?.description
-            cell.selectionStyle = .none
+            cell.descriptionLabel.text = detailStoreInfo?.releaseNotes
+            cell.descriptionLabel.textColor = UIColor(red: 143.0/255.0, green: 143.0/255.0, blue: 143.0/255.0, alpha:1.0)
+            cell.descriptionLabel.textAlignment = .left
+            cell.descriptionLabel.backgroundColor = UIColor(red: 229.0/255.0, green: 229.0/255.0, blue: 229.0/255.0, alpha:1.0)
+            let topView = UIView(frame: CGRect(x: 10, y: 0, width: cell.descriptionLabel.frame.width, height: 10))
+            topView.backgroundColor = UIColor(red: 229.0/255.0, green: 229.0/255.0, blue: 229.0/255.0, alpha:1.0)
+            cell.addSubview(topView)
             return cell
         case (1,0):
+            let cell: DescriptionCell = detailView.dequeueReusableCell(withIdentifier: descriptionCellId, for: indexPath) as! DescriptionCell
+            cell.descriptionLabel.text = detailStoreInfo?.description
+            if (isDescription) {
+                cell.descriptionLabel.numberOfLines = 0
+            } else {
+                cell.descriptionLabel.numberOfLines = 10
+            }
+            cell.selectionStyle = .none
+            return cell
+        case (2,0):
             let cell: CategoryCell = detailView.dequeueReusableCell(withIdentifier: categoryCellId, for: indexPath) as! CategoryCell
             cell.selectionStyle = .none
          
-            guard let info = detailStoreInfo,
-                cell.labelStackView.subviews.count == 0 else {
-                return cell
-            }
-            
-            for text in info.genres {
-                let label: CategoryLabel = CategoryLabel()
-                label.text = text
-                cell.labelStackView.addArrangedSubview(label)
-            }
+//            guard let info = detailStoreInfo,
+//                cell.labelStackView.subviews.count == 0 else {
+//                return cell
+//            }
+//            
+//            for text in info.genres {
+//                let label: CategoryLabel = CategoryLabel()
+//                label.text = "\n  #\(text)  \n"
+//                cell.labelStackView.addArrangedSubview(label)
+//            }
             return cell
         default:
             let cell = UITableViewCell()
@@ -108,10 +129,21 @@ extension DetailStoreInfoViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 && indexPath.row == 3 {
-            detailView.reloadRows(at: [indexPath], with: .bottom)
-//            UITableViewCell *cell = [ cellForRowAtIndexPath:indexPath];
             let cell = detailView.cellForRow(at: indexPath) as! DetailBottomCell
-            cell.arrow.isHighlighted = !cell.arrow.isHighlighted
+            cell.arrow.isHighlighted = !isMore
+            isMore = !isMore
+            if isMore {
+                detailView.beginUpdates()
+                detailView.insertRows(at: [IndexPath(row: 4, section: 0)], with: .none)
+                detailView.endUpdates()
+            } else {
+                detailView.beginUpdates()
+                detailView.deleteRows(at: [IndexPath(row: 4, section: 0)], with: .none)
+                detailView.endUpdates()
+            }
+        } else if indexPath.section == 1 && indexPath.row == 0 {
+            isDescription = !isDescription
+            detailView.reloadRows(at: [indexPath], with: .none)
         }
     }
 }
@@ -123,21 +155,21 @@ extension DetailStoreInfoViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if (section == 1) {
+        if (section == 2) {
             return 20
         }
         return 0
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if (section == 1) {
+        if (section == 2) {
             return 20
         }
         return 0
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if (section == 1) {
+        if (section == 2) {
             let headerView: UIView = UIView()
             headerView.backgroundColor = UIColor(red: 242.0/255.0, green: 242.0/255.0, blue: 242.0/255.0, alpha:1.0)
             return headerView
@@ -146,7 +178,7 @@ extension DetailStoreInfoViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        if (section == 1) {
+        if (section == 2) {
             let footerView: UIView = UIView()
             footerView.backgroundColor = UIColor(red: 242.0/255.0, green: 242.0/255.0, blue: 242.0/255.0, alpha:1.0)
             return footerView

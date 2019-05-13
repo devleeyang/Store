@@ -10,7 +10,8 @@ import UIKit
 
 class CategoryCell: UITableViewCell {
 
-    @IBOutlet weak var labelStackView: UIStackView!
+    @IBOutlet weak var labelViews: UIView!
+    @IBOutlet weak var labelHeight: NSLayoutConstraint!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

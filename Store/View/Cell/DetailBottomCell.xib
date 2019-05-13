@@ -46,7 +46,7 @@
                                 </constraints>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QWq-s2-IRO">
-                                <rect key="frame" x="0.0" y="53.5" width="323" height="1"/>
+                                <rect key="frame" x="10" y="53.5" width="303" height="1"/>
                                 <color key="backgroundColor" red="0.85882352941176465" green="0.85882352941176465" blue="0.85882352941176465" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="TON-Rg-SZh"/>
@@ -55,12 +55,12 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="QWq-s2-IRO" firstAttribute="width" secondItem="GJ8-wm-L1C" secondAttribute="width" id="KVE-H5-2Rd"/>
+                            <constraint firstItem="3rz-jf-RM5" firstAttribute="trailing" secondItem="QWq-s2-IRO" secondAttribute="trailing" constant="10" id="1Qb-tE-mf2"/>
                             <constraint firstItem="QWq-s2-IRO" firstAttribute="bottom" secondItem="3rz-jf-RM5" secondAttribute="bottom" id="Wh8-vW-q5q"/>
                             <constraint firstItem="3rz-jf-RM5" firstAttribute="trailing" secondItem="Lgn-pd-fQR" secondAttribute="trailing" constant="10" id="hCG-NV-dJS"/>
                             <constraint firstItem="Lgn-pd-fQR" firstAttribute="leading" secondItem="3rz-jf-RM5" secondAttribute="leading" constant="10" id="js9-if-q1h"/>
                             <constraint firstItem="Lgn-pd-fQR" firstAttribute="centerY" secondItem="3rz-jf-RM5" secondAttribute="centerY" id="lFz-9a-3Hi"/>
-                            <constraint firstItem="QWq-s2-IRO" firstAttribute="centerX" secondItem="3rz-jf-RM5" secondAttribute="centerX" id="ueO-AS-8wA"/>
+                            <constraint firstItem="QWq-s2-IRO" firstAttribute="leading" secondItem="3rz-jf-RM5" secondAttribute="leading" constant="10" id="mlJ-8f-tO8"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3rz-jf-RM5"/>
                     </view>

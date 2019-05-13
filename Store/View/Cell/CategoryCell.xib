@@ -28,19 +28,23 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="left" distribution="equalCentering" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="UBP-fD-Lmp">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZlH-Wl-O9E">
                                 <rect key="frame" x="10" y="41" width="316" height="40.5"/>
-                            </stackView>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" priority="250" constant="40.5" id="I6X-1C-wtY"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="UBP-fD-Lmp" firstAttribute="leading" secondItem="hmA-zf-MPW" secondAttribute="leading" id="9HF-GD-mXY"/>
+                            <constraint firstItem="ZlH-Wl-O9E" firstAttribute="leading" secondItem="U4P-KL-G5q" secondAttribute="leading" constant="10" id="93R-iR-Vrw"/>
                             <constraint firstAttribute="trailing" secondItem="hmA-zf-MPW" secondAttribute="trailing" constant="10" id="DkD-BS-D1p"/>
                             <constraint firstItem="hmA-zf-MPW" firstAttribute="top" secondItem="U4P-KL-G5q" secondAttribute="top" constant="10" id="KZE-Pj-6Pc"/>
-                            <constraint firstAttribute="bottom" secondItem="UBP-fD-Lmp" secondAttribute="bottom" constant="10" id="OBu-jt-2QR"/>
+                            <constraint firstAttribute="bottom" secondItem="ZlH-Wl-O9E" secondAttribute="bottom" constant="10" id="RWG-PR-6tR"/>
                             <constraint firstItem="hmA-zf-MPW" firstAttribute="leading" secondItem="U4P-KL-G5q" secondAttribute="leading" constant="10" id="SUd-xG-4qO"/>
-                            <constraint firstItem="UBP-fD-Lmp" firstAttribute="top" secondItem="hmA-zf-MPW" secondAttribute="bottom" constant="10" id="hNN-xi-uve"/>
-                            <constraint firstItem="UBP-fD-Lmp" firstAttribute="centerX" secondItem="U4P-KL-G5q" secondAttribute="centerX" id="w4z-Yv-gQH"/>
+                            <constraint firstItem="ZlH-Wl-O9E" firstAttribute="top" secondItem="hmA-zf-MPW" secondAttribute="bottom" constant="10" id="bfd-oc-PRC"/>
+                            <constraint firstAttribute="trailing" secondItem="ZlH-Wl-O9E" secondAttribute="trailing" constant="10" id="qLJ-qC-5fm"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -53,7 +57,8 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="labelStackView" destination="UBP-fD-Lmp" id="Ks8-a6-aJH"/>
+                <outlet property="labelHeight" destination="I6X-1C-wtY" id="uy1-lf-VF3"/>
+                <outlet property="labelViews" destination="ZlH-Wl-O9E" id="IX1-VD-DCO"/>
             </connections>
             <point key="canvasLocation" x="145.59999999999999" y="150.22488755622189"/>
         </tableViewCell>

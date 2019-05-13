@@ -53,6 +53,8 @@ extension MainListViewController: UITableViewDataSource {
         if let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailStoreInfoViewController") as? DetailStoreInfoViewController {
             detailVC.detailStoreInfo = storeList[indexPath.row]
             if let navigator = navigationController {
+                let backItem = UIBarButtonItem(title: searchController.searchBar.text, style: .plain, target: nil, action: nil)
+                navigationItem.backBarButtonItem = backItem
                 navigator.pushViewController(detailVC, animated: true)
             }
         }
