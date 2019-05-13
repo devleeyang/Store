@@ -27,4 +27,10 @@ class DetailBottomCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        leftLabel.text = ""
+        rightLabel.text = ""
+        arrow.alpha = 1
+    }
 }

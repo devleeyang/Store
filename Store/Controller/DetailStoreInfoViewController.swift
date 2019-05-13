@@ -84,6 +84,7 @@ extension DetailStoreInfoViewController: UITableViewDataSource {
             let cell: DetailBottomCell = detailView.dequeueReusableCell(withIdentifier: bottomCellId, for: indexPath) as! DetailBottomCell
             cell.leftLabel.text = "새로운 기능"
             cell.rightLabel.text = detailStoreInfo?.version
+            cell.arrow.isHighlighted = isMore
             cell.selectionStyle = .none
             return cell
         case (0,4):
@@ -92,7 +93,7 @@ extension DetailStoreInfoViewController: UITableViewDataSource {
             cell.descriptionLabel.textColor = UIColor(red: 143.0/255.0, green: 143.0/255.0, blue: 143.0/255.0, alpha:1.0)
             cell.descriptionLabel.textAlignment = .left
             cell.descriptionLabel.backgroundColor = UIColor(red: 229.0/255.0, green: 229.0/255.0, blue: 229.0/255.0, alpha:1.0)
-            let topView = UIView(frame: CGRect(x: 10, y: 0, width: cell.descriptionLabel.frame.width, height: 10))
+            let topView = UIView(frame: CGRect(x: 10, y: 0, width: UIScreen.main.bounds.size.width - 20, height: 10))
             topView.backgroundColor = UIColor(red: 229.0/255.0, green: 229.0/255.0, blue: 229.0/255.0, alpha:1.0)
             cell.addSubview(topView)
             return cell
