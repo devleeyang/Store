@@ -49,7 +49,7 @@ enum Rating: String, Codable {
 
 enum FormattedPrice: String, Codable {
     case the5900 = "￦5,900"
-    case 무료 = "무료"
+    case theFree = "무료"
 }
 
 // MARK: Encode/decode helpers

@@ -20,7 +20,7 @@ class MainListCell: UITableViewCell {
                 appName.text = store.trackName
                 companyName.text = store.sellerName
                 category.text = store.genres.first
-                price.text = "\(store.formattedPrice)"
+                price.text = "\(store.formattedPrice.rawValue)"
                 starView.current = CGFloat(store.averageUserRating ?? 0)
             }
         }
