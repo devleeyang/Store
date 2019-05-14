@@ -10,10 +10,10 @@ import Foundation
 
 struct SearchStoreModel: Codable {
     let resultCount: Int
-    let results: [Result]
+    let results: [Results]
 }
 
-struct Result: Codable {
+struct Results: Codable {
     let screenshotUrls: [String]
     let artworkUrl512: String
     let trackViewURL: String
