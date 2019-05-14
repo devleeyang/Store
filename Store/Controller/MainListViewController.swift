@@ -30,10 +30,10 @@ class MainListViewController: UIViewController {
     }
     
     func showErrorMesseage(msg: String) {
-        let alertVC = UIAlertController.init(title: "알림", message: "\(msg)\n잠시 후 다시 시도해주세요", preferredStyle: .alert)
+        let alertViewController = UIAlertController.init(title: "알림", message: "\(msg)\n잠시 후 다시 시도해주세요", preferredStyle: .alert)
         let confirm = UIAlertAction(title: "확인", style: .default)
-        alertVC.addAction(confirm)
-        present(alertVC, animated: true, completion: nil)
+        alertViewController.addAction(confirm)
+        present(alertViewController, animated: true, completion: nil)
     }
 }
 
@@ -50,12 +50,12 @@ extension MainListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailStoreInfoViewController") as? DetailStoreInfoViewController {
-            detailVC.detailStoreInfo = storeList[indexPath.row]
+        if let detailViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailStoreInfoViewController") as? DetailStoreInfoViewController {
+            detailViewController.detailStoreInfo = storeList[indexPath.row]
             if let navigator = navigationController {
                 let backItem = UIBarButtonItem(title: searchController.searchBar.text, style: .plain, target: nil, action: nil)
                 navigationItem.backBarButtonItem = backItem
-                navigator.pushViewController(detailVC, animated: true)
+                navigator.pushViewController(detailViewController, animated: true)
             }
         }
     }

@@ -69,7 +69,7 @@
                         <viewLayoutGuide key="safeArea" id="IZ2-2Y-Gly"/>
                     </view>
                     <connections>
-                        <outlet property="detailView" destination="eZe-tk-s49" id="Onn-Ch-zJb"/>
+                        <outlet property="detailTableView" destination="eZe-tk-s49" id="Onn-Ch-zJb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fvp-BI-S8E" userLabel="First Responder" sceneMemberID="firstResponder"/>

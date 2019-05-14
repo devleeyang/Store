@@ -21,15 +21,15 @@ class DetailStoreInfoViewController: UIViewController {
     private var isMore: Bool = false
     private var isDescription: Bool = false
     private var inputList: Array<CategoryLabel> = Array<CategoryLabel>()
-    @IBOutlet weak var detailView: UITableView!
+    @IBOutlet weak var detailTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        detailView.register(UINib(nibName: mainCellId, bundle: nil), forCellReuseIdentifier: mainCellId)
-        detailView.register(UINib(nibName: bottomCellId, bundle: nil), forCellReuseIdentifier: bottomCellId)
-        detailView.register(UINib(nibName: descriptionCellId, bundle: nil), forCellReuseIdentifier: descriptionCellId)
-        detailView.register(UINib(nibName: categoryCellId, bundle: nil), forCellReuseIdentifier: categoryCellId)
-        detailView.backgroundColor = #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
-        detailView.separatorColor = .clear
+        detailTableView.register(UINib(nibName: mainCellId, bundle: nil), forCellReuseIdentifier: mainCellId)
+        detailTableView.register(UINib(nibName: bottomCellId, bundle: nil), forCellReuseIdentifier: bottomCellId)
+        detailTableView.register(UINib(nibName: descriptionCellId, bundle: nil), forCellReuseIdentifier: descriptionCellId)
+        detailTableView.register(UINib(nibName: categoryCellId, bundle: nil), forCellReuseIdentifier: categoryCellId)
+        detailTableView.backgroundColor = #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
+        detailTableView.separatorColor = .clear
     }
     
     @objc func pressedWebButton(_ sender: UIButton) {
@@ -45,8 +45,8 @@ class DetailStoreInfoViewController: UIViewController {
     @objc func pressedShareButton(_ sender: UIButton) {
         if let text = detailStoreInfo?.trackViewUrl {
             let textShare = [text]
-            let activityVC = UIActivityViewController(activityItems: textShare, applicationActivities: nil)
-            self.present(activityVC, animated: true, completion: nil)
+            let activityViewController = UIActivityViewController(activityItems: textShare, applicationActivities: nil)
+            self.present(activityViewController, animated: true, completion: nil)
         }
     }
     
@@ -79,7 +79,7 @@ extension DetailStoreInfoViewController: UITableViewDataSource {
         let index = (indexPath.section, indexPath.row)
         switch index {
         case (0,0):
-            let cell: DetailMainCell = detailView.dequeueReusableCell(withIdentifier: mainCellId, for: indexPath) as! DetailMainCell
+            let cell: DetailMainCell = detailTableView.dequeueReusableCell(withIdentifier: mainCellId, for: indexPath) as! DetailMainCell
             cell.datailStore = detailStoreInfo
             cell.imageCollection.dataSource = self
             cell.imageCollection.register(UINib(nibName: collectionCellId, bundle: nil), forCellWithReuseIdentifier: collectionCellId)
@@ -88,7 +88,7 @@ extension DetailStoreInfoViewController: UITableViewDataSource {
             cell.selectionStyle = .none
             return cell
         case (0,1):
-            let cell: DetailBottomCell = detailView.dequeueReusableCell(withIdentifier: bottomCellId, for: indexPath) as! DetailBottomCell
+            let cell: DetailBottomCell = detailTableView.dequeueReusableCell(withIdentifier: bottomCellId, for: indexPath) as! DetailBottomCell
             cell.leftLabel.text = "크기"
             cell.arrow.alpha = 0
             let convertSize = Int(detailStoreInfo?.fileSizeBytes ?? "0")
@@ -99,21 +99,21 @@ extension DetailStoreInfoViewController: UITableViewDataSource {
             cell.selectionStyle = .none
             return cell
         case (0,2):
-            let cell: DetailBottomCell = detailView.dequeueReusableCell(withIdentifier: bottomCellId, for: indexPath) as! DetailBottomCell
+            let cell: DetailBottomCell = detailTableView.dequeueReusableCell(withIdentifier: bottomCellId, for: indexPath) as! DetailBottomCell
             cell.leftLabel.text = "연령"
             cell.rightLabel.text = (detailStoreInfo?.trackContentRating).map { $0.rawValue }
             cell.arrow.alpha = 0
             cell.selectionStyle = .none
             return cell
         case (0,3):
-            let cell: DetailBottomCell = detailView.dequeueReusableCell(withIdentifier: bottomCellId, for: indexPath) as! DetailBottomCell
+            let cell: DetailBottomCell = detailTableView.dequeueReusableCell(withIdentifier: bottomCellId, for: indexPath) as! DetailBottomCell
             cell.leftLabel.text = "새로운 기능"
             cell.rightLabel.text = detailStoreInfo?.version
             cell.arrow.isHighlighted = isMore
             cell.selectionStyle = .none
             return cell
         case (0,4):
-            let cell: DescriptionCell = detailView.dequeueReusableCell(withIdentifier: descriptionCellId, for: indexPath) as! DescriptionCell
+            let cell: DescriptionCell = detailTableView.dequeueReusableCell(withIdentifier: descriptionCellId, for: indexPath) as! DescriptionCell
             cell.descriptionLabel.text = detailStoreInfo?.releaseNotes
             cell.descriptionLabel.textColor = #colorLiteral(red: 0.5607843137, green: 0.5607843137, blue: 0.5607843137, alpha: 0.74)
             cell.descriptionLabel.textAlignment = .left
@@ -121,7 +121,7 @@ extension DetailStoreInfoViewController: UITableViewDataSource {
             cell.topView.backgroundColor = #colorLiteral(red: 0.8980392157, green: 0.8980392157, blue: 0.8980392157, alpha: 0.74)
             return cell
         case (1,0):
-            let cell: DescriptionCell = detailView.dequeueReusableCell(withIdentifier: descriptionCellId, for: indexPath) as! DescriptionCell
+            let cell: DescriptionCell = detailTableView.dequeueReusableCell(withIdentifier: descriptionCellId, for: indexPath) as! DescriptionCell
             cell.descriptionLabel.text = detailStoreInfo?.description
             if (isDescription) {
                 cell.descriptionLabel.numberOfLines = 0
@@ -131,7 +131,7 @@ extension DetailStoreInfoViewController: UITableViewDataSource {
             cell.selectionStyle = .none
             return cell
         case (2,0):
-            let cell: CategoryCell = detailView.dequeueReusableCell(withIdentifier: categoryCellId, for: indexPath) as! CategoryCell
+            let cell: CategoryCell = detailTableView.dequeueReusableCell(withIdentifier: categoryCellId, for: indexPath) as! CategoryCell
             cell.selectionStyle = .none
          
             guard let info = detailStoreInfo else {
@@ -174,21 +174,21 @@ extension DetailStoreInfoViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 && indexPath.row == 3 {
-            let cell = detailView.cellForRow(at: indexPath) as! DetailBottomCell
+            let cell = detailTableView.cellForRow(at: indexPath) as! DetailBottomCell
             cell.arrow.isHighlighted = !isMore
             isMore = !isMore
             if isMore {
-                detailView.beginUpdates()
-                detailView.insertRows(at: [IndexPath(row: 4, section: 0)], with: .top)
-                detailView.endUpdates()
+                detailTableView.beginUpdates()
+                detailTableView.insertRows(at: [IndexPath(row: 4, section: 0)], with: .top)
+                detailTableView.endUpdates()
             } else {
-                detailView.beginUpdates()
-                detailView.deleteRows(at: [IndexPath(row: 4, section: 0)], with: .top)
-                detailView.endUpdates()
+                detailTableView.beginUpdates()
+                detailTableView.deleteRows(at: [IndexPath(row: 4, section: 0)], with: .top)
+                detailTableView.endUpdates()
             }
         } else if indexPath.section == 1 && indexPath.row == 0 {
             isDescription = !isDescription
-            detailView.reloadRows(at: [indexPath], with: .automatic)
+            detailTableView.reloadRows(at: [indexPath], with: .automatic)
         }
     }
 }
