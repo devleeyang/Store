@@ -14,17 +14,18 @@ class NetworkManager {
         if let encodeString = query.addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed) {
             get(path: "search?term=\(encodeString)&country=kr&media=software", onSuccess: { (data) in
                 do {
-                    let storeResponse = try JSONDecoder().decode(SearchStoreModel.self, from: data)
-                    let storeList = storeResponse.results.map { store -> StoreInfo in
+                    let response = try JSONDecoder().decode(SearchStoreModel.self, from: data)
+                    let storeList = response.results.map { store -> StoreInfo in
                         return StoreInfo(screenshotUrls: store.screenshotUrls, trackViewUrl: store.trackViewURL, description: store.description, trackName: store.trackName, formattedPrice: store.formattedPrice, genres: store.genres, trackContentRating: store.trackContentRating, sellerName: store.sellerName, releaseNotes: store.releaseNotes, version: store.version, averageUserRating: store.averageUserRating, price: store.price, fileSizeBytes: store.fileSizeBytes, artworkUrl512: store.artworkUrl512)
                     }
-                    guard storeList.count != 0 else {
-                        return onFailure(SearchError.notDecoder("스토어 정보를 찾을 수 없습니다."))
+                    
+                    if storeList.count > 0 {
+                        onSuccess(storeList)
+                    } else {
+                        onFailure(.empty)
                     }
-                    onSuccess(storeList)
                 } catch {
-                    print(error)
-                    onFailure(SearchError.notDecoder("스토어 정보를 찾을 수 없습니다."))
+                    onFailure(.failure(error))
                 }
             }, onFailure: {
                 onFailure($0)
@@ -34,14 +35,20 @@ class NetworkManager {
     
     private func get(path: String, onSuccess: @escaping (Data) -> Void, onFailure: @escaping (SearchError) -> Void) {
         Alamofire.request("https://itunes.apple.com/\(path)", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseJSON {
-            guard let responseData = $0.data else {
+            guard let data = $0.data else {
+                onFailure(.notResponseData)
                 return
             }
+            
             switch $0.result {
             case .success:
-                onSuccess(responseData)
+                onSuccess(data)
             case .failure:
-                onFailure(SearchError.notFound("서버연결이 되지 않습니다."))
+                if let error = $0.error {
+                    onFailure(.failure(error))
+                } else {
+                    onFailure(.unknown)
+                }
             }
         }
     }
