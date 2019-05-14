@@ -21,9 +21,9 @@ class CategoryLabel: UILabel {
     }
     
     func commonInit(){
-        textColor = UIColor(red: 116.0/255.0, green: 116.0/255.0, blue: 116.0/255.0, alpha:1.0)
+        textColor = #colorLiteral(red: 0.4549019608, green: 0.4549019608, blue: 0.4549019608, alpha: 0.74)
         font = .systemFont(ofSize: 14.0)
-        layer.borderColor = UIColor(red: 216.0/255.0, green: 216.0/255.0, blue: 216.0/255.0, alpha:1.0).cgColor
+        layer.borderColor = #colorLiteral(red: 0.8470588235, green: 0.8470588235, blue: 0.8470588235, alpha: 0.74).cgColor
         layer.borderWidth = 1.0
         layer.cornerRadius = 4
         numberOfLines = 0

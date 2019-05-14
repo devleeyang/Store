@@ -37,33 +37,33 @@ class MainListCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        backGroundView.layer.borderColor = UIColor(red: 222.0/255.0, green: 222.0/255.0, blue: 222.0/255.0, alpha:1.0).cgColor
+        backGroundView.layer.borderColor = #colorLiteral(red: 0.8705882353, green: 0.8705882353, blue: 0.8705882353, alpha: 0.74).cgColor
         backGroundView.layer.borderWidth = 1.0
         backGroundView.layer.cornerRadius = 4.0
         
         appIcon.roundedCorners(top: true)
         
-        appName.textColor =  UIColor(red: 88.0/255.0, green: 88.0/255.0, blue: 88.0/255.0, alpha:1.0)
+        appName.textColor =  #colorLiteral(red: 0.3450980392, green: 0.3450980392, blue: 0.3450980392, alpha: 0.74)
         appName.font = .systemFont(ofSize: 16.0)
         appName.textAlignment = .left
         
-        companyName.textColor =  UIColor(red: 191.0/255.0, green: 191.0/255.0, blue: 191.0/255.0, alpha:1.0)
+        companyName.textColor =  #colorLiteral(red: 0.7490196078, green: 0.7490196078, blue: 0.7490196078, alpha: 0.74)
         companyName.font = .systemFont(ofSize: 14.0)
         companyName.textAlignment = .left
         
-        category.textColor =  UIColor(red: 101.0/255.0, green: 101.0/255.0, blue: 101.0/255.0, alpha:1.0)
+        category.textColor =  #colorLiteral(red: 0.3960784314, green: 0.3960784314, blue: 0.3960784314, alpha: 0.74)
         category.font = .systemFont(ofSize: 14.0)
         category.textAlignment = .left
         
-        price.textColor =  UIColor(red: 96.0/255.0, green: 96.0/255.0, blue: 96.0/255.0, alpha:1.0)
+        price.textColor =  #colorLiteral(red: 0.3764705882, green: 0.3764705882, blue: 0.3764705882, alpha: 0.74)
         price.font = .systemFont(ofSize: 14.0)
         price.textAlignment = .left
         
         let attribute = StarRatingAttribute(type: .rate,
                                             point: 14,
                                             spacing: 4,
-                                            emptyColor: UIColor(red: 230.0/255.0, green: 230.0/255.0, blue: 230.0/255.0, alpha:1.0),
-                                            fillColor: .yellow,
+                                            emptyColor: #colorLiteral(red: 0.9019607843, green: 0.9019607843, blue: 0.9019607843, alpha: 0.74),
+                                            fillColor: #colorLiteral(red: 0.9994240403, green: 0.9855536819, blue: 0, alpha: 1),
                                             emptyImage: nil,
                                             fillImage: nil)
         starView.configure(attribute, current: 0, max: 5)

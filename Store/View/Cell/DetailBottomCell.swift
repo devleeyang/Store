@@ -16,10 +16,10 @@ class DetailBottomCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        leftLabel.textColor = UIColor(red: 36.0/255.0, green: 36.0/255.0, blue: 36.0/255.0, alpha:1.0)
+        leftLabel.textColor = #colorLiteral(red: 0.1411764706, green: 0.1411764706, blue: 0.1411764706, alpha: 1)
         leftLabel.font = .systemFont(ofSize: 15.0)
         
-        rightLabel.textColor = UIColor(red: 43.0/255.0, green: 166.0/255.0, blue: 173.0/255.0, alpha:1.0)
+        rightLabel.textColor = #colorLiteral(red: 0.168627451, green: 0.6509803922, blue: 0.6784313725, alpha: 1)
         rightLabel.font = .systemFont(ofSize: 15.0)
     }
 

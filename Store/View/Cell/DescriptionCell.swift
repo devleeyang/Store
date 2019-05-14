@@ -15,7 +15,7 @@ class DescriptionCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        descriptionLabel.textColor = .black
+        descriptionLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         descriptionLabel.font = .systemFont(ofSize: 15.0)
     }
 
@@ -26,11 +26,11 @@ class DescriptionCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        descriptionLabel.textColor = .black
+        descriptionLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         descriptionLabel.font = .systemFont(ofSize: 15.0)
         descriptionLabel.text = ""
         descriptionLabel.backgroundColor = .clear
         descriptionLabel.textAlignment = .center
-        topView.backgroundColor = .white
+        topView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     }
 }

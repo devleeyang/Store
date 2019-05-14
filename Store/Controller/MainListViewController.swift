@@ -10,7 +10,7 @@ import UIKit
 import Kingfisher
 
 class MainListViewController: UIViewController {
-    @IBOutlet weak var storeView: UITableView!
+    @IBOutlet weak var storeTableView: UITableView!
     private let listCellId = "MainListCell"
     private let searchController = UISearchController(searchResultsController: nil)
     private var storeList = Array<StoreInfo>()
@@ -24,9 +24,9 @@ class MainListViewController: UIViewController {
         navigationItem.hidesSearchBarWhenScrolling = false
         definesPresentationContext = true
         
-        storeView.register(UINib(nibName: listCellId, bundle: nil), forCellReuseIdentifier: listCellId)
-        storeView.backgroundColor = UIColor(red: 242.0/255.0, green: 242.0/255.0, blue: 242.0/255.0, alpha:1.0)
-        storeView.separatorColor = .clear
+        storeTableView.register(UINib(nibName: listCellId, bundle: nil), forCellReuseIdentifier: listCellId)
+        storeTableView.backgroundColor = #colorLiteral(red: 0.9490196078, green: 0.9490196078, blue: 0.9490196078, alpha: 0.7430436644)
+        storeTableView.separatorColor = .clear
     }
     
     func showErrorMesseage(msg: String) {
@@ -43,7 +43,7 @@ extension MainListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: MainListCell = storeView.dequeueReusableCell(withIdentifier: listCellId, for: indexPath) as! MainListCell
+        let cell: MainListCell = storeTableView.dequeueReusableCell(withIdentifier: listCellId, for: indexPath) as! MainListCell
         cell.resultStore = storeList[indexPath.row]
         cell.selectionStyle = .none
         return cell
@@ -82,7 +82,7 @@ extension MainListViewController : UITableViewDataSourcePrefetching {
 extension MainListViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         storeList.removeAll()
-        storeView.reloadData()
+        storeTableView.reloadData()
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -91,12 +91,12 @@ extension MainListViewController: UISearchBarDelegate {
             searchText.count > 0
             else {
                 storeList.removeAll()
-                storeView.reloadData()
+                storeTableView.reloadData()
                 return
         }
         NetworkManager().getStore(query: searchText, onSuccess: { [weak self] in
             self?.storeList = $0
-            self?.storeView.reloadData()
+            self?.storeTableView.reloadData()
             }, onFailure: { [weak self] error in
                 self?.showErrorMesseage(msg: error.localizedDescription)
         })
