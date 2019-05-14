@@ -11,6 +11,8 @@ import UIKit
 class DescriptionCell: UITableViewCell {
 
     @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var topView: UIView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         descriptionLabel.textColor = .black
@@ -22,4 +24,13 @@ class DescriptionCell: UITableViewCell {
 
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        descriptionLabel.textColor = .black
+        descriptionLabel.font = .systemFont(ofSize: 15.0)
+        descriptionLabel.text = ""
+        descriptionLabel.backgroundColor = .clear
+        descriptionLabel.textAlignment = .center
+        topView.backgroundColor = .white
+    }
 }

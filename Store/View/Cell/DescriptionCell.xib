@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,6 +22,13 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nq7-aD-YvS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s6G-M8-4W3">
+                                <rect key="frame" x="10" y="0.0" width="300" height="10"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="10" id="NPE-SX-t9Y"/>
+                                </constraints>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nDd-EI-jeb">
                                 <rect key="frame" x="10" y="10" width="300" height="23.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -31,8 +38,11 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="aqQ-dP-F7P" firstAttribute="trailing" secondItem="s6G-M8-4W3" secondAttribute="trailing" constant="10" id="FSo-jF-AEe"/>
+                            <constraint firstItem="s6G-M8-4W3" firstAttribute="leading" secondItem="aqQ-dP-F7P" secondAttribute="leading" constant="10" id="O2l-yg-L1r"/>
                             <constraint firstItem="aqQ-dP-F7P" firstAttribute="bottom" secondItem="nDd-EI-jeb" secondAttribute="bottom" constant="10" id="W4j-Hm-J8e"/>
                             <constraint firstItem="nDd-EI-jeb" firstAttribute="top" secondItem="aqQ-dP-F7P" secondAttribute="top" constant="10" id="epq-RF-qsc"/>
+                            <constraint firstItem="aqQ-dP-F7P" firstAttribute="top" secondItem="s6G-M8-4W3" secondAttribute="top" id="ex4-cf-aA3"/>
                             <constraint firstItem="nDd-EI-jeb" firstAttribute="leading" secondItem="aqQ-dP-F7P" secondAttribute="leading" constant="10" id="mJq-5K-MS3"/>
                             <constraint firstItem="aqQ-dP-F7P" firstAttribute="trailing" secondItem="nDd-EI-jeb" secondAttribute="trailing" constant="10" id="v8w-bE-YwX"/>
                         </constraints>
@@ -49,6 +59,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="descriptionLabel" destination="nDd-EI-jeb" id="0BH-QV-fNf"/>
+                <outlet property="topView" destination="s6G-M8-4W3" id="lk7-VH-LEa"/>
             </connections>
             <point key="canvasLocation" x="132.80000000000001" y="154.72263868065968"/>
         </tableViewCell>

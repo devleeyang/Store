@@ -28,18 +28,18 @@ class DetailStoreInfoViewController: UIViewController {
         detailView.register(UINib(nibName: bottomCellId, bundle: nil), forCellReuseIdentifier: bottomCellId)
         detailView.register(UINib(nibName: descriptionCellId, bundle: nil), forCellReuseIdentifier: descriptionCellId)
         detailView.register(UINib(nibName: categoryCellId, bundle: nil), forCellReuseIdentifier: categoryCellId)
-        detailView.backgroundColor = UIColor(red: 242.0/255.0, green: 242.0/255.0, blue: 242.0/255.0, alpha:1.0)
+        detailView.backgroundColor = .white
         detailView.separatorColor = .clear
     }
     
     @objc func pressedWebButton(_ sender: UIButton) {
         guard
             let urlString = detailStoreInfo?.trackViewUrl,
-            let url = URL(string: urlString)
+            let url = URL(string: urlString),
+            UIApplication.shared.canOpenURL(url)
             else { return }
         
-        let safariViewController = SFSafariViewController(url: url)
-        present(safariViewController, animated: true, completion: nil)
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
     @objc func pressedShareButton(_ sender: UIButton) {
@@ -118,9 +118,7 @@ extension DetailStoreInfoViewController: UITableViewDataSource {
             cell.descriptionLabel.textColor = UIColor(red: 143.0/255.0, green: 143.0/255.0, blue: 143.0/255.0, alpha:1.0)
             cell.descriptionLabel.textAlignment = .left
             cell.descriptionLabel.backgroundColor = UIColor(red: 229.0/255.0, green: 229.0/255.0, blue: 229.0/255.0, alpha:1.0)
-            let topView = UIView(frame: CGRect(x: 10, y: 0, width: UIScreen.main.bounds.size.width - 20, height: 10))
-            topView.backgroundColor = UIColor(red: 229.0/255.0, green: 229.0/255.0, blue: 229.0/255.0, alpha:1.0)
-            cell.addSubview(topView)
+            cell.topView.backgroundColor = UIColor(red: 229.0/255.0, green: 229.0/255.0, blue: 229.0/255.0, alpha:1.0)
             return cell
         case (1,0):
             let cell: DescriptionCell = detailView.dequeueReusableCell(withIdentifier: descriptionCellId, for: indexPath) as! DescriptionCell
@@ -181,16 +179,16 @@ extension DetailStoreInfoViewController: UITableViewDataSource {
             isMore = !isMore
             if isMore {
                 detailView.beginUpdates()
-                detailView.insertRows(at: [IndexPath(row: 4, section: 0)], with: .none)
+                detailView.insertRows(at: [IndexPath(row: 4, section: 0)], with: .top)
                 detailView.endUpdates()
             } else {
                 detailView.beginUpdates()
-                detailView.deleteRows(at: [IndexPath(row: 4, section: 0)], with: .none)
+                detailView.deleteRows(at: [IndexPath(row: 4, section: 0)], with: .top)
                 detailView.endUpdates()
             }
         } else if indexPath.section == 1 && indexPath.row == 0 {
             isDescription = !isDescription
-            detailView.reloadRows(at: [indexPath], with: .none)
+            detailView.reloadRows(at: [indexPath], with: .automatic)
         }
     }
 }
