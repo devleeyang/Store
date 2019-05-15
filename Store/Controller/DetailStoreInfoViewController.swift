@@ -198,6 +198,7 @@ extension DetailStoreInfoViewController: UITableViewDataSource {
             }
             detailTableView.endUpdates()
             UIView.setAnimationsEnabled(true)
+            
         } else if indexPath.section == 1 && indexPath.row == 0 {
             isDescription = !isDescription
             UIView.setAnimationsEnabled(false)
@@ -229,13 +230,11 @@ extension DetailStoreInfoViewController: UITableViewDelegate {
             }
             
             let height = isMore ? note.height(withFontSize: 16) + 26 : 0
-             print("hr.yang ---- height1 : \(height)")
             return height
         case (1,0):
-            let a = storeInfo.description.height(withFontSize: 15) + 20
-            let b = a > 200 ? 200 : a
-            let height = isDescription ? a : b
-            print("hr.yang ---- height2 : \(height)")
+            let minHeight = storeInfo.description.height(withFontSize: 15) + 20
+            let finalHeight = minHeight > 200 ? 200 : minHeight
+            let height = isDescription ? minHeight : finalHeight
             return height
         case (2,0):
             return UITableView.automaticDimension
