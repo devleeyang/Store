@@ -76,7 +76,6 @@ extension DetailStoreInfoViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let index = (indexPath.section, indexPath.row)
         switch index {
         case (0,0):
@@ -207,8 +206,6 @@ extension DetailStoreInfoViewController: UITableViewDataSource {
 extension DetailStoreInfoViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        boundingRectWithSize
-        print("hr.yang ---- heightforrow : \(indexPath)")
         guard let storeInfo = detailStoreInfo else {
             return 0
         }
@@ -221,7 +218,7 @@ extension DetailStoreInfoViewController: UITableViewDelegate {
             return storeInfo.trackContentRating.rawValue.height(withFontSize: 15) + 20
         case (0,4):
             guard let note = storeInfo.releaseNotes else {
-                return CGFloat.leastNonzeroMagnitude
+                return 0
             }
             
             let height = isMore ? note.height(withFontSize: 16) + 26 : 0
