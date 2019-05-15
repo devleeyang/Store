@@ -28,9 +28,12 @@ class DescriptionCell: UITableViewCell {
         super.prepareForReuse()
         descriptionLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         descriptionLabel.font = .systemFont(ofSize: 15.0)
+        descriptionLabel.numberOfLines = 0
         descriptionLabel.text = ""
         descriptionLabel.backgroundColor = .clear
         descriptionLabel.textAlignment = .center
         topView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        topView.alpha = 0
+        topView.clipsToBounds = true
     }
 }

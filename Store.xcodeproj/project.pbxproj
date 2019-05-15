@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CD98395C228969F000E4C3BB /* CALayer+border.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD98395B228969F000E4C3BB /* CALayer+border.swift */; };
+		CDF5FBFF228BB5E8005DD017 /* String+height.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF5FBFE228BB5E8005DD017 /* String+height.swift */; };
 		EE83E3432287E70100CAADB0 /* DetailBottomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE83E3412287E70100CAADB0 /* DetailBottomCell.swift */; };
 		EE83E3442287E70100CAADB0 /* DetailBottomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE83E3422287E70100CAADB0 /* DetailBottomCell.xib */; };
 		EE83E3462287EA0F00CAADB0 /* MGStarRatingView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE83E3452287EA0F00CAADB0 /* MGStarRatingView.framework */; };
@@ -60,6 +61,7 @@
 
 /* Begin PBXFileReference section */
 		CD98395B228969F000E4C3BB /* CALayer+border.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+border.swift"; sourceTree = "<group>"; };
+		CDF5FBFE228BB5E8005DD017 /* String+height.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+height.swift"; sourceTree = "<group>"; };
 		EE83E3412287E70100CAADB0 /* DetailBottomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailBottomCell.swift; sourceTree = "<group>"; };
 		EE83E3422287E70100CAADB0 /* DetailBottomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailBottomCell.xib; sourceTree = "<group>"; };
 		EE83E3452287EA0F00CAADB0 /* MGStarRatingView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MGStarRatingView.framework; path = Carthage/Build/iOS/MGStarRatingView.framework; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 			children = (
 				EE83E35322881CBF00CAADB0 /* UIView+Round.swift */,
 				CD98395B228969F000E4C3BB /* CALayer+border.swift */,
+				CDF5FBFE228BB5E8005DD017 /* String+height.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -314,6 +317,7 @@
 				EE83E35122880EDF00CAADB0 /* DetailStoreInfoViewController.swift in Sources */,
 				EE83E35E2288620B00CAADB0 /* CategoryLabel.swift in Sources */,
 				EECFF1262286D03300CC0DE6 /* SearchError.swift in Sources */,
+				CDF5FBFF228BB5E8005DD017 /* String+height.swift in Sources */,
 				EECFF1242286BBBF00CC0DE6 /* SearchStoreModel.swift in Sources */,
 				EECFF1572287292700CC0DE6 /* MainListViewController.swift in Sources */,
 				EE83E35422881CBF00CAADB0 /* UIView+Round.swift in Sources */,
@@ -474,7 +478,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = Store/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -497,7 +501,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = Store/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
