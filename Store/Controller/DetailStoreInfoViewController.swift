@@ -30,6 +30,7 @@ class DetailStoreInfoViewController: UIViewController {
         detailTableView.register(UINib(nibName: categoryCellId, bundle: nil), forCellReuseIdentifier: categoryCellId)
         detailTableView.backgroundColor = #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
         detailTableView.separatorColor = .clear
+        detailTableView.bounces = false
     }
     
     @objc func pressedWebButton(_ sender: UIButton) {
@@ -56,25 +57,20 @@ class DetailStoreInfoViewController: UIViewController {
 extension DetailStoreInfoViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-//        return 3
-        return 1
+        return 3
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
-//        switch section {
-//        case 0:
-//            if isMore {
-//                return 5
-//            }
-//            return 4
-//        case 1:
-//            return 1
-//        case 2:
-//            return 1
-//        default:
-//            return 0
-//        }
+        switch section {
+        case 0:
+            return 5
+        case 1:
+            return 1
+        case 2:
+            return 1
+        default:
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -119,21 +115,16 @@ extension DetailStoreInfoViewController: UITableViewDataSource {
             let cell: DescriptionCell = detailTableView.dequeueReusableCell(withIdentifier: descriptionCellId, for: indexPath) as! DescriptionCell
             cell.descriptionLabel.text = detailStoreInfo?.releaseNotes
             cell.descriptionLabel.textColor = #colorLiteral(red: 0.5607843137, green: 0.5607843137, blue: 0.5607843137, alpha: 0.74)
-            cell.descriptionLabel.numberOfLines = 0
             cell.descriptionLabel.textAlignment = .left
             cell.descriptionLabel.backgroundColor = #colorLiteral(red: 0.8980392157, green: 0.8980392157, blue: 0.8980392157, alpha: 0.74)
-            cell.topView.backgroundColor = #colorLiteral(red: 0.8980392157, green: 0.8980392157, blue: 0.8980392157, alpha: 0.74)
-            cell.topView.alpha = 1
+            cell.selectionStyle = .none
+//            cell.topView.backgroundColor = #colorLiteral(red: 0.8980392157, green: 0.8980392157, blue: 0.8980392157, alpha: 0.74)
+//            cell.topView.alpha = 0
 
             return cell
         case (1,0):
             let cell: DescriptionCell = detailTableView.dequeueReusableCell(withIdentifier: descriptionCellId, for: indexPath) as! DescriptionCell
             cell.descriptionLabel.text = detailStoreInfo?.description
-            if (isDescription) {
-                cell.descriptionLabel.numberOfLines = 0
-            } else {
-                cell.descriptionLabel.numberOfLines = 10
-            }
             cell.selectionStyle = .none
             return cell
         case (2,0):
@@ -183,10 +174,16 @@ extension DetailStoreInfoViewController: UITableViewDataSource {
             let cell = detailTableView.cellForRow(at: indexPath) as! DetailBottomCell
             cell.arrow.isHighlighted = !isMore
             isMore = !isMore
-            isMore ? detailTableView.reloadRows(at: [IndexPath(row: 4, section: 0)], with: .bottom) : detailTableView.reloadRows(at: [IndexPath(row: 4, section: 0)], with: .top)
+//            UIView.setAnimationsEnabled(false)
+            detailTableView.beginUpdates()
+//            let loc = detailTableView.contentOffset
+//            isMore ? detailTableView.reloadRows(at: [IndexPath(row: 4, section: 0)], with: .bottom) : detailTableView.reloadRows(at: [IndexPath(row: 4, section: 0)], with: .top)
+            detailTableView.reloadRows(at: [IndexPath(row: 4, section: 0)], with: .none)
+//            detailTableView.contentOffset = loc
+            detailTableView.endUpdates()
         } else if indexPath.section == 1 && indexPath.row == 0 {
             isDescription = !isDescription
-            detailTableView.reloadRows(at: [indexPath], with: .bottom)
+            isDescription ? detailTableView.reloadRows(at: [IndexPath(row: 0, section: 1)], with: .bottom) : detailTableView.reloadRows(at: [IndexPath(row: 0, section: 1)], with: .none)
         }
     }
 }
@@ -195,6 +192,7 @@ extension DetailStoreInfoViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 //        boundingRectWithSize
+        print("hr.yang ---- heightforrow : \(indexPath)")
         guard let storeInfo = detailStoreInfo else {
             return 0
         }
@@ -202,7 +200,7 @@ extension DetailStoreInfoViewController: UITableViewDelegate {
         let index = (indexPath.section, indexPath.row)
         switch index {
         case (0,0):
-            return storeInfo.sellerName.height(withFontSize: 17) + storeInfo.trackName.height(withFontSize: 21) + 395
+            return storeInfo.sellerName.height(withFontSize: 17) + storeInfo.trackName.height(withFontSize: 21) + 397
         case (0,1),(0,2),(0,3):
             return storeInfo.trackContentRating.rawValue.height(withFontSize: 15) + 20
         case (0,4):
@@ -210,12 +208,17 @@ extension DetailStoreInfoViewController: UITableViewDelegate {
                 return CGFloat.leastNonzeroMagnitude
             }
             
-            let height = isMore ? note.height(withFontSize: 15) + 20 : CGFloat.leastNonzeroMagnitude
+            let height = isMore ? note.height(withFontSize: 16) + 26 : CGFloat.leastNonzeroMagnitude
+             print("hr.yang ---- height1 : \(height)")
             return height
         case (1,0):
-            return 0
+            let a = storeInfo.description.height(withFontSize: 15) + 20
+            let b = a > 200 ? 200 : a
+            let height = isDescription ? a : b
+            print("hr.yang ---- height2 : \(height)")
+            return height
         case (2,0):
-            return 0
+            return UITableView.automaticDimension
         default:
             return UITableView.automaticDimension
         }
@@ -225,14 +228,14 @@ extension DetailStoreInfoViewController: UITableViewDelegate {
         if (section == 2) {
             return 20
         }
-        return 0
+        return CGFloat.leastNonzeroMagnitude
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if (section == 2) {
             return 20
         }
-        return 0
+        return CGFloat.leastNonzeroMagnitude
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -243,7 +246,7 @@ extension DetailStoreInfoViewController: UITableViewDelegate {
         }
         return nil
     }
-    
+
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if (section == 2) {
             let footerView: UIView = UIView()

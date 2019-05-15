@@ -34,6 +34,5 @@ class DescriptionCell: UITableViewCell {
         descriptionLabel.textAlignment = .center
         topView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         topView.alpha = 0
-        topView.clipsToBounds = true
     }
 }
