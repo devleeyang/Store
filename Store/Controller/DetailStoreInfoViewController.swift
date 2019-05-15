@@ -192,9 +192,14 @@ extension DetailStoreInfoViewController: UITableViewDataSource {
                 detailTableView.deleteRows(at: [IndexPath(row: 4, section: 0)], with: .none)
             }
             detailTableView.endUpdates()
+            UIView.setAnimationsEnabled(true)
         } else if indexPath.section == 1 && indexPath.row == 0 {
             isDescription = !isDescription
-            isDescription ? detailTableView.reloadRows(at: [IndexPath(row: 0, section: 1)], with: .bottom) : detailTableView.reloadRows(at: [IndexPath(row: 0, section: 1)], with: .none)
+            UIView.setAnimationsEnabled(false)
+            detailTableView.beginUpdates()
+            detailTableView.reloadRows(at: [IndexPath(row: 0, section: 1)], with: .none)
+            detailTableView.endUpdates()
+            UIView.setAnimationsEnabled(true)
         }
     }
 }
