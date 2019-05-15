@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DescriptionCell" id="KGk-i7-Jjw" customClass="DescriptionCell" customModule="Store" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nq7-aD-YvS">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ibM-BD-xM2">
+                                <rect key="frame" x="10" y="0.0" width="300" height="43.5"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s6G-M8-4W3">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="10"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="10" id="eCK-Xu-kTq"/>
+                                        </constraints>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nDd-EI-jeb">
+                                        <rect key="frame" x="0.0" y="10" width="300" height="23.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M4S-WW-pSK">
+                                        <rect key="frame" x="0.0" y="33.5" width="300" height="10"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="10" id="TD4-Mc-Jgd"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ibM-BD-xM2" firstAttribute="height" secondItem="Nq7-aD-YvS" secondAttribute="height" id="5Et-2f-PgO"/>
+                            <constraint firstItem="ibM-BD-xM2" firstAttribute="centerY" secondItem="aqQ-dP-F7P" secondAttribute="centerY" id="GZc-wn-Fqv"/>
+                            <constraint firstItem="ibM-BD-xM2" firstAttribute="leading" secondItem="aqQ-dP-F7P" secondAttribute="leading" constant="10" id="IN0-2N-9mS"/>
+                            <constraint firstItem="ibM-BD-xM2" firstAttribute="trailing" secondItem="aqQ-dP-F7P" secondAttribute="trailing" constant="-10" id="rto-rd-u5u"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="aqQ-dP-F7P"/>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="Nq7-aD-YvS" secondAttribute="trailing" id="53f-eY-8Lp"/>
+                    <constraint firstItem="Nq7-aD-YvS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="GIJ-hE-Cbu"/>
+                    <constraint firstItem="Nq7-aD-YvS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="KVp-Sh-t7g"/>
+                    <constraint firstAttribute="bottom" secondItem="Nq7-aD-YvS" secondAttribute="bottom" id="fUq-2m-dr0"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="bottomView" destination="M4S-WW-pSK" id="BFb-Zl-2Hm"/>
+                <outlet property="descriptionLabel" destination="nDd-EI-jeb" id="0BH-QV-fNf"/>
+                <outlet property="topView" destination="s6G-M8-4W3" id="lk7-VH-LEa"/>
+            </connections>
+            <point key="canvasLocation" x="132.80000000000001" y="154.72263868065968"/>
+        </tableViewCell>
+    </objects>
+</document>
