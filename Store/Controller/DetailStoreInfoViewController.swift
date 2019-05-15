@@ -64,7 +64,8 @@ extension DetailStoreInfoViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return 5
+            let count = isMore ? 5: 4
+            return count
         case 1:
             return 1
         case 2:
@@ -172,15 +173,22 @@ extension DetailStoreInfoViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 && indexPath.row == 3 {
+            guard
+                let storeInfo = detailStoreInfo,
+                let _ = storeInfo.releaseNotes else {
+                return
+            }
+            
             let cell = detailTableView.cellForRow(at: indexPath) as! DetailBottomCell
             cell.arrow.isHighlighted = !isMore
             isMore = !isMore
-//            UIView.setAnimationsEnabled(false)
+            UIView.setAnimationsEnabled(false)
             detailTableView.beginUpdates()
-//            let loc = detailTableView.contentOffset
-//            isMore ? detailTableView.reloadRows(at: [IndexPath(row: 4, section: 0)], with: .bottom) : detailTableView.reloadRows(at: [IndexPath(row: 4, section: 0)], with: .top)
-            detailTableView.reloadRows(at: [IndexPath(row: 4, section: 0)], with: .none)
-//            detailTableView.contentOffset = loc
+            if isMore {
+                detailTableView.insertRows(at: [IndexPath(row: 4, section: 0)], with: .none)
+            } else {
+                detailTableView.deleteRows(at: [IndexPath(row: 4, section: 0)], with: .none)
+            }
             detailTableView.endUpdates()
         } else if indexPath.section == 1 && indexPath.row == 0 {
             isDescription = !isDescription
@@ -209,7 +217,7 @@ extension DetailStoreInfoViewController: UITableViewDelegate {
                 return CGFloat.leastNonzeroMagnitude
             }
             
-            let height = isMore ? note.height(withFontSize: 16) + 26 : CGFloat.leastNonzeroMagnitude
+            let height = isMore ? note.height(withFontSize: 16) + 26 : 0
              print("hr.yang ---- height1 : \(height)")
             return height
         case (1,0):
