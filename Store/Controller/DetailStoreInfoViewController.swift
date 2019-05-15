@@ -39,8 +39,9 @@ class DetailStoreInfoViewController: UIViewController {
             let url = URL(string: urlString),
             UIApplication.shared.canOpenURL(url)
             else { return }
-        #if TARGET_OS_IPHONE
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        #if TARGET_OS_SIMULATOR
+        #else
+         UIApplication.shared.open(url, options: [:], completionHandler: nil)
         #endif
     }
     
