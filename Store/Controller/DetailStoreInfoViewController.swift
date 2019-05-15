@@ -21,15 +21,21 @@ class DetailStoreInfoViewController: UIViewController {
     private var isMore: Bool = false
     private var isDescription: Bool = false
     private var inputList: Array<CategoryLabel> = Array<CategoryLabel>()
-    @IBOutlet weak var detailView: UITableView!
+    @IBOutlet weak var detailTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        detailView.register(UINib(nibName: mainCellId, bundle: nil), forCellReuseIdentifier: mainCellId)
-        detailView.register(UINib(nibName: bottomCellId, bundle: nil), forCellReuseIdentifier: bottomCellId)
-        detailView.register(UINib(nibName: descriptionCellId, bundle: nil), forCellReuseIdentifier: descriptionCellId)
-        detailView.register(UINib(nibName: categoryCellId, bundle: nil), forCellReuseIdentifier: categoryCellId)
-        detailView.backgroundColor = .white
-        detailView.separatorColor = .clear
+        detailTableView.register(UINib(nibName: mainCellId, bundle: nil), forCellReuseIdentifier: mainCellId)
+        detailTableView.register(UINib(nibName: bottomCellId, bundle: nil), forCellReuseIdentifier: bottomCellId)
+        detailTableView.register(UINib(nibName: descriptionCellId, bundle: nil), forCellReuseIdentifier: descriptionCellId)
+        detailTableView.register(UINib(nibName: categoryCellId, bundle: nil), forCellReuseIdentifier: categoryCellId)
+        detailTableView.backgroundColor = #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
+        detailTableView.separatorColor = .clear
+        detailTableView.bounces = false
+        
+        guard #available(iOS 11.0, *) else {
+            navigationController?.navigationBar.isHidden = false
+            return
+        }
     }
     
     @objc func pressedWebButton(_ sender: UIButton) {
@@ -38,15 +44,17 @@ class DetailStoreInfoViewController: UIViewController {
             let url = URL(string: urlString),
             UIApplication.shared.canOpenURL(url)
             else { return }
-        
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        #if TARGET_OS_SIMULATOR
+        #else
+         UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        #endif
     }
     
     @objc func pressedShareButton(_ sender: UIButton) {
         if let text = detailStoreInfo?.trackViewUrl {
             let textShare = [text]
-            let activityVC = UIActivityViewController(activityItems: textShare, applicationActivities: nil)
-            self.present(activityVC, animated: true, completion: nil)
+            let activityViewController = UIActivityViewController(activityItems: textShare, applicationActivities: nil)
+            self.present(activityViewController, animated: true, completion: nil)
         }
     }
     
@@ -61,10 +69,8 @@ extension DetailStoreInfoViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            if isMore {
-                return 5
-            }
-            return 4
+            let count = isMore ? 5: 4
+            return count
         case 1:
             return 1
         case 2:
@@ -75,11 +81,10 @@ extension DetailStoreInfoViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let index = (indexPath.section, indexPath.row)
         switch index {
         case (0,0):
-            let cell: DetailMainCell = detailView.dequeueReusableCell(withIdentifier: mainCellId, for: indexPath) as! DetailMainCell
+            let cell: DetailMainCell = detailTableView.dequeueReusableCell(withIdentifier: mainCellId, for: indexPath) as! DetailMainCell
             cell.datailStore = detailStoreInfo
             cell.imageCollection.dataSource = self
             cell.imageCollection.register(UINib(nibName: collectionCellId, bundle: nil), forCellWithReuseIdentifier: collectionCellId)
@@ -88,7 +93,7 @@ extension DetailStoreInfoViewController: UITableViewDataSource {
             cell.selectionStyle = .none
             return cell
         case (0,1):
-            let cell: DetailBottomCell = detailView.dequeueReusableCell(withIdentifier: bottomCellId, for: indexPath) as! DetailBottomCell
+            let cell: DetailBottomCell = detailTableView.dequeueReusableCell(withIdentifier: bottomCellId, for: indexPath) as! DetailBottomCell
             cell.leftLabel.text = "크기"
             cell.arrow.alpha = 0
             let convertSize = Int(detailStoreInfo?.fileSizeBytes ?? "0")
@@ -99,39 +104,39 @@ extension DetailStoreInfoViewController: UITableViewDataSource {
             cell.selectionStyle = .none
             return cell
         case (0,2):
-            let cell: DetailBottomCell = detailView.dequeueReusableCell(withIdentifier: bottomCellId, for: indexPath) as! DetailBottomCell
+            let cell: DetailBottomCell = detailTableView.dequeueReusableCell(withIdentifier: bottomCellId, for: indexPath) as! DetailBottomCell
             cell.leftLabel.text = "연령"
             cell.rightLabel.text = (detailStoreInfo?.trackContentRating).map { $0.rawValue }
             cell.arrow.alpha = 0
             cell.selectionStyle = .none
             return cell
         case (0,3):
-            let cell: DetailBottomCell = detailView.dequeueReusableCell(withIdentifier: bottomCellId, for: indexPath) as! DetailBottomCell
+            let cell: DetailBottomCell = detailTableView.dequeueReusableCell(withIdentifier: bottomCellId, for: indexPath) as! DetailBottomCell
             cell.leftLabel.text = "새로운 기능"
             cell.rightLabel.text = detailStoreInfo?.version
             cell.arrow.isHighlighted = isMore
             cell.selectionStyle = .none
             return cell
         case (0,4):
-            let cell: DescriptionCell = detailView.dequeueReusableCell(withIdentifier: descriptionCellId, for: indexPath) as! DescriptionCell
+            let cell: DescriptionCell = detailTableView.dequeueReusableCell(withIdentifier: descriptionCellId, for: indexPath) as! DescriptionCell
             cell.descriptionLabel.text = detailStoreInfo?.releaseNotes
-            cell.descriptionLabel.textColor = UIColor(red: 143.0/255.0, green: 143.0/255.0, blue: 143.0/255.0, alpha:1.0)
+            cell.descriptionLabel.textColor = #colorLiteral(red: 0.5607843137, green: 0.5607843137, blue: 0.5607843137, alpha: 0.74)
             cell.descriptionLabel.textAlignment = .left
-            cell.descriptionLabel.backgroundColor = UIColor(red: 229.0/255.0, green: 229.0/255.0, blue: 229.0/255.0, alpha:1.0)
-            cell.topView.backgroundColor = UIColor(red: 229.0/255.0, green: 229.0/255.0, blue: 229.0/255.0, alpha:1.0)
+            cell.descriptionLabel.backgroundColor = #colorLiteral(red: 0.8980392157, green: 0.8980392157, blue: 0.8980392157, alpha: 0.74)
+            cell.selectionStyle = .none
+            cell.topView.backgroundColor = #colorLiteral(red: 0.8980392157, green: 0.8980392157, blue: 0.8980392157, alpha: 0.74)
+            cell.topView.alpha = 1
+            cell.bottomView.backgroundColor = #colorLiteral(red: 0.8980392157, green: 0.8980392157, blue: 0.8980392157, alpha: 0.74)
+            cell.bottomView.alpha = 1
+
             return cell
         case (1,0):
-            let cell: DescriptionCell = detailView.dequeueReusableCell(withIdentifier: descriptionCellId, for: indexPath) as! DescriptionCell
+            let cell: DescriptionCell = detailTableView.dequeueReusableCell(withIdentifier: descriptionCellId, for: indexPath) as! DescriptionCell
             cell.descriptionLabel.text = detailStoreInfo?.description
-            if (isDescription) {
-                cell.descriptionLabel.numberOfLines = 0
-            } else {
-                cell.descriptionLabel.numberOfLines = 10
-            }
             cell.selectionStyle = .none
             return cell
         case (2,0):
-            let cell: CategoryCell = detailView.dequeueReusableCell(withIdentifier: categoryCellId, for: indexPath) as! CategoryCell
+            let cell: CategoryCell = detailTableView.dequeueReusableCell(withIdentifier: categoryCellId, for: indexPath) as! CategoryCell
             cell.selectionStyle = .none
          
             guard let info = detailStoreInfo else {
@@ -173,59 +178,98 @@ extension DetailStoreInfoViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let loc = detailTableView.contentOffset
         if indexPath.section == 0 && indexPath.row == 3 {
-            let cell = detailView.cellForRow(at: indexPath) as! DetailBottomCell
+            guard
+                let storeInfo = detailStoreInfo,
+                let _ = storeInfo.releaseNotes else {
+                return
+            }
+            
+            let cell = detailTableView.cellForRow(at: indexPath) as! DetailBottomCell
             cell.arrow.isHighlighted = !isMore
             isMore = !isMore
+            UIView.setAnimationsEnabled(false)
+            detailTableView.beginUpdates()
             if isMore {
-                detailView.beginUpdates()
-                detailView.insertRows(at: [IndexPath(row: 4, section: 0)], with: .top)
-                detailView.endUpdates()
+                detailTableView.insertRows(at: [IndexPath(row: 4, section: 0)], with: .none)
             } else {
-                detailView.beginUpdates()
-                detailView.deleteRows(at: [IndexPath(row: 4, section: 0)], with: .top)
-                detailView.endUpdates()
+                detailTableView.deleteRows(at: [IndexPath(row: 4, section: 0)], with: .none)
             }
+            detailTableView.endUpdates()
+            UIView.setAnimationsEnabled(true)
+            
         } else if indexPath.section == 1 && indexPath.row == 0 {
             isDescription = !isDescription
-            detailView.reloadRows(at: [indexPath], with: .automatic)
+            UIView.setAnimationsEnabled(false)
+            detailTableView.beginUpdates()
+            detailTableView.reloadRows(at: [IndexPath(row: 0, section: 1)], with: .none)
+            detailTableView.endUpdates()
+            UIView.setAnimationsEnabled(true)
         }
+        detailTableView.contentOffset = loc
     }
 }
 
 extension DetailStoreInfoViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+        guard let storeInfo = detailStoreInfo else {
+            return 0
+        }
+        
+        let index = (indexPath.section, indexPath.row)
+        switch index {
+        case (0,0):
+            return storeInfo.sellerName.height(withFontSize: 17) + storeInfo.trackName.height(withFontSize: 21) + 397
+        case (0,1),(0,2),(0,3):
+            return storeInfo.trackContentRating.rawValue.height(withFontSize: 15) + 20
+        case (0,4):
+            guard let note = storeInfo.releaseNotes else {
+                return 0
+            }
+            
+            let height = isMore ? note.height(withFontSize: 16) + 26 : 0
+            return height
+        case (1,0):
+            let minHeight = storeInfo.description.height(withFontSize: 15) + 20
+            let finalHeight = minHeight > 200 ? 200 : minHeight
+            let height = isDescription ? minHeight : finalHeight
+            return height
+        case (2,0):
+            return UITableView.automaticDimension
+        default:
+            return UITableView.automaticDimension
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if (section == 2) {
             return 20
         }
-        return 0
+        return CGFloat.leastNonzeroMagnitude
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if (section == 2) {
             return 20
         }
-        return 0
+        return CGFloat.leastNonzeroMagnitude
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if (section == 2) {
             let headerView: UIView = UIView()
-            headerView.backgroundColor = UIColor(red: 242.0/255.0, green: 242.0/255.0, blue: 242.0/255.0, alpha:1.0)
+            headerView.backgroundColor = #colorLiteral(red: 0.9490196078, green: 0.9490196078, blue: 0.9490196078, alpha: 0.74)
             return headerView
         }
         return nil
     }
-    
+
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if (section == 2) {
             let footerView: UIView = UIView()
-            footerView.backgroundColor = UIColor(red: 242.0/255.0, green: 242.0/255.0, blue: 242.0/255.0, alpha:1.0)
+            footerView.backgroundColor = #colorLiteral(red: 0.9490196078, green: 0.9490196078, blue: 0.9490196078, alpha: 0.74)
             return footerView
         }
         return nil

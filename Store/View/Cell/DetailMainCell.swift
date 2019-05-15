@@ -33,24 +33,24 @@ class DetailMainCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        webBtn.titleLabel?.textColor = .black
+        webBtn.titleLabel?.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         webBtn.titleLabel?.font = .systemFont(ofSize: 14.0)
     
-        shareBtn.titleLabel?.textColor = .black
+        shareBtn.titleLabel?.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         shareBtn.titleLabel?.font = .systemFont(ofSize: 14.0)
-        shareBtn.layer.addBorder(edge: .left, color: UIColor(red: 161.0/255.0, green: 161.0/255.0, blue: 161.0/255.0, alpha:1.0), thickness: 1.0)
+        shareBtn.layer.addBorder(edge: .left, color: #colorLiteral(red: 0.631372549, green: 0.631372549, blue: 0.631372549, alpha: 0.74), thickness: 1.0)
         
-        appNameLabel.textColor = .black
+        appNameLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         appNameLabel.font = .boldSystemFont(ofSize: 21.0)
         
-        sellerNameLabel.textColor = UIColor(red: 121.0/255.0, green: 121.0/255.0, blue: 121.0/255.0, alpha:1.0)
+        sellerNameLabel.textColor = #colorLiteral(red: 0.4745098039, green: 0.4745098039, blue: 0.4745098039, alpha: 0.74)
         sellerNameLabel.font = .systemFont(ofSize: 17.0)
         
-        priceLabel.textColor = .black
+        priceLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         priceLabel.font = .boldSystemFont(ofSize: 18.0)
         
         buttonBackView.layer.borderWidth = 1.0
-        buttonBackView.layer.borderColor = UIColor(red: 161.0/255.0, green: 161.0/255.0, blue: 161.0/255.0, alpha:1.0).cgColor
+        buttonBackView.layer.borderColor = #colorLiteral(red: 0.631372549, green: 0.631372549, blue: 0.631372549, alpha: 0.74).cgColor
         buttonBackView.layer.cornerRadius = 4
     }
 

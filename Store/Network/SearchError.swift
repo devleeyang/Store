@@ -9,20 +9,23 @@
 import Foundation
 
 enum SearchError: Error {
-    case unknown(Error)
-    case notFound(String)
-    case notDecoder(String)
+    case unknown
+    case empty
+    case notResponseData
+    case failure(Error)
 }
 
-extension SearchError: LocalizedError {
+extension SearchError {
     var localizedDescription: String {
         switch self {
-        case let .unknown(error):
+        case .unknown:
+            return "Unknown"
+        case .empty:
+            return "Store List is Empty"
+        case .notResponseData:
+            return "Not Response Data"
+        case .failure(let error):
             return error.localizedDescription
-        case let .notFound(x):
-            return x
-        case let .notDecoder(x):
-            return x
         }
     }
 }
