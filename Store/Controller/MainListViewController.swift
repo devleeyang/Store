@@ -22,14 +22,11 @@ class MainListViewController: UIViewController {
         searchController.searchBar.returnKeyType = UIReturnKeyType.done
         if #available(iOS 11.0, *) {
             navigationItem.searchController = searchController
-        } else {
-            // Fallback on earlier versions
-        }
-        
-        if #available(iOS 11.0, *) {
             navigationItem.hidesSearchBarWhenScrolling = false
         } else {
-            // Fallback on earlier versions
+            storeTableView.tableHeaderView = searchController.searchBar
+            searchController.hidesNavigationBarDuringPresentation = false
+            navigationController?.navigationBar.isHidden = true
         }
         definesPresentationContext = true
         
@@ -38,6 +35,17 @@ class MainListViewController: UIViewController {
         storeTableView.separatorColor = .clear
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        guard #available(iOS 11.0, *) else {
+            storeTableView.tableHeaderView = searchController.searchBar
+            searchController.hidesNavigationBarDuringPresentation = false
+            navigationController?.navigationBar.isHidden = true
+            return
+        }
+    
+    }
     func showErrorMesseage(msg: String) {
         let alertViewController = UIAlertController.init(title: "알림", message: "\(msg)\n잠시 후 다시 시도해주세요", preferredStyle: .alert)
         let confirm = UIAlertAction(title: "확인", style: .default)

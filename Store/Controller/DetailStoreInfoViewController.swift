@@ -31,6 +31,11 @@ class DetailStoreInfoViewController: UIViewController {
         detailTableView.backgroundColor = #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
         detailTableView.separatorColor = .clear
         detailTableView.bounces = false
+        
+        guard #available(iOS 11.0, *) else {
+            navigationController?.navigationBar.isHidden = false
+            return
+        }
     }
     
     @objc func pressedWebButton(_ sender: UIButton) {
@@ -173,6 +178,7 @@ extension DetailStoreInfoViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let loc = detailTableView.contentOffset
         if indexPath.section == 0 && indexPath.row == 3 {
             guard
                 let storeInfo = detailStoreInfo,
@@ -200,6 +206,7 @@ extension DetailStoreInfoViewController: UITableViewDataSource {
             detailTableView.endUpdates()
             UIView.setAnimationsEnabled(true)
         }
+        detailTableView.contentOffset = loc
     }
 }
 
