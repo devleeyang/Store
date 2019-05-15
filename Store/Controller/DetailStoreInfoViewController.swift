@@ -120,8 +120,10 @@ extension DetailStoreInfoViewController: UITableViewDataSource {
             cell.descriptionLabel.textAlignment = .left
             cell.descriptionLabel.backgroundColor = #colorLiteral(red: 0.8980392157, green: 0.8980392157, blue: 0.8980392157, alpha: 0.74)
             cell.selectionStyle = .none
-//            cell.topView.backgroundColor = #colorLiteral(red: 0.8980392157, green: 0.8980392157, blue: 0.8980392157, alpha: 0.74)
-//            cell.topView.alpha = 0
+            cell.topView.backgroundColor = #colorLiteral(red: 0.8980392157, green: 0.8980392157, blue: 0.8980392157, alpha: 0.74)
+            cell.topView.alpha = 1
+            cell.bottomView.backgroundColor = #colorLiteral(red: 0.8980392157, green: 0.8980392157, blue: 0.8980392157, alpha: 0.74)
+            cell.bottomView.alpha = 1
 
             return cell
         case (1,0):

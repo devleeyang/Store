@@ -12,6 +12,7 @@ class DescriptionCell: UITableViewCell {
 
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var topView: UIView!
+    @IBOutlet weak var bottomView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -34,5 +35,7 @@ class DescriptionCell: UITableViewCell {
         descriptionLabel.textAlignment = .center
         topView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         topView.alpha = 0
+        bottomView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        bottomView.alpha = 0
     }
 }
