@@ -2,9 +2,9 @@
 AppStore 같은 Store List / 상세화면 구현
 
 # 환경
-Language: swift4.2
-Xcode: 10.2
-Dependency Management: Carthage
+Language: swift4.2 <br>
+Xcode: 10.2 <br>
+Dependency Management: Carthage <br>
 
 # 빌드전
 카르타고를 사용해야합니다.
