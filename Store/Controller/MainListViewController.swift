@@ -20,8 +20,17 @@ class MainListViewController: UIViewController {
         searchController.searchBar.placeholder = "Search Store"
         searchController.searchBar.delegate = self
         searchController.searchBar.returnKeyType = UIReturnKeyType.done
-        navigationItem.searchController = searchController
-        navigationItem.hidesSearchBarWhenScrolling = false
+        if #available(iOS 11.0, *) {
+            navigationItem.searchController = searchController
+        } else {
+            // Fallback on earlier versions
+        }
+        
+        if #available(iOS 11.0, *) {
+            navigationItem.hidesSearchBarWhenScrolling = false
+        } else {
+            // Fallback on earlier versions
+        }
         definesPresentationContext = true
         
         storeTableView.register(UINib(nibName: listCellId, bundle: nil), forCellReuseIdentifier: listCellId)
