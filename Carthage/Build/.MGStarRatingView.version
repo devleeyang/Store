@@ -1,0 +1,10 @@
+{
+  "commitish" : "1.0.0",
+  "iOS" : [
+    {
+      "name" : "MGStarRatingView",
+      "hash" : "e350ffa9fe5b3f212d743fcb1e8c3f363345c29fd9abe5b291d266c008a48f51",
+      "swiftToolchainVersion" : "5.0.1 (swiftlang-1001.0.82.4 clang-1001.0.46.5)"
+    }
+  ]
+}
