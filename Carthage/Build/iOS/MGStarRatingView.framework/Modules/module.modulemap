@@ -1,0 +1,11 @@
+framework module MGStarRatingView {
+  umbrella header "MGStarRatingView.h"
+
+  export *
+  module * { export * }
+}
+
+module MGStarRatingView.Swift {
+    header "MGStarRatingView-Swift.h"
+    requires objc
+}
