@@ -10,7 +10,7 @@ import UIKit
 import MGStarRatingView
 import Kingfisher
 
-class MainListCell: UITableViewCell {
+class MainStoreListTableViewCell: UITableViewCell {
 
     var resultStore: StoreInfo? {
         didSet {

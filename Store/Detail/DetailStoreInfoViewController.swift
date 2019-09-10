@@ -13,24 +13,23 @@ import SafariServices
 class DetailStoreInfoViewController: UIViewController {
 
     var detailStoreInfo: StoreInfo?
-    private let mainCellId = "DetailMainCell"
     private let collectionCellId = "StoreCollectionCell"
-    private let bottomCellId = "DetailBottomCell"
-    private let descriptionCellId = "DescriptionCell"
-    private let categoryCellId = "CategoryCell"
     private var isMore: Bool = false
     private var isDescription: Bool = false
     private var inputList: Array<CategoryLabel> = Array<CategoryLabel>()
-    @IBOutlet weak var detailTableView: UITableView!
+    @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        detailTableView.register(UINib(nibName: mainCellId, bundle: nil), forCellReuseIdentifier: mainCellId)
-        detailTableView.register(UINib(nibName: bottomCellId, bundle: nil), forCellReuseIdentifier: bottomCellId)
-        detailTableView.register(UINib(nibName: descriptionCellId, bundle: nil), forCellReuseIdentifier: descriptionCellId)
-        detailTableView.register(UINib(nibName: categoryCellId, bundle: nil), forCellReuseIdentifier: categoryCellId)
-        detailTableView.backgroundColor = #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
-        detailTableView.separatorColor = .clear
-        detailTableView.bounces = false
+
+        let cellTypes: [UITableViewCell.Type] = [ DetailMainCell.self,
+                  DetailBottomCell.self,
+                  DescriptionCell.self,
+                  CategoryCell.self ]
+        
+        tableView.registers(cellTypes)
+        tableView.backgroundColor = #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
+        tableView.separatorColor = .clear
+        tableView.bounces = false
         
         guard #available(iOS 11.0, *) else {
             navigationController?.navigationBar.isHidden = false
@@ -84,16 +83,16 @@ extension DetailStoreInfoViewController: UITableViewDataSource {
         let index = (indexPath.section, indexPath.row)
         switch index {
         case (0,0):
-            let cell: DetailMainCell = detailTableView.dequeueReusableCell(withIdentifier: mainCellId, for: indexPath) as! DetailMainCell
+            let cell = tableView.dequeueReusableCell(withClass: DetailMainCell.self, for: indexPath) as DetailMainCell
             cell.datailStore = detailStoreInfo
             cell.imageCollection.dataSource = self
-            cell.imageCollection.register(UINib(nibName: collectionCellId, bundle: nil), forCellWithReuseIdentifier: collectionCellId)
+            cell.imageCollection.register(StoreCollectionCell.self)
             cell.webBtn.addTarget(self, action: #selector(pressedWebButton), for: .touchUpInside)
             cell.shareBtn.addTarget(self, action: #selector(pressedShareButton), for: .touchUpInside)
             cell.selectionStyle = .none
             return cell
         case (0,1):
-            let cell: DetailBottomCell = detailTableView.dequeueReusableCell(withIdentifier: bottomCellId, for: indexPath) as! DetailBottomCell
+            let cell = tableView.dequeueReusableCell(withClass: DetailBottomCell.self, for: indexPath) as DetailBottomCell
             cell.leftLabel.text = "크기"
             cell.arrow.alpha = 0
             let convertSize = Int(detailStoreInfo?.fileSizeBytes ?? "0")
@@ -104,21 +103,21 @@ extension DetailStoreInfoViewController: UITableViewDataSource {
             cell.selectionStyle = .none
             return cell
         case (0,2):
-            let cell: DetailBottomCell = detailTableView.dequeueReusableCell(withIdentifier: bottomCellId, for: indexPath) as! DetailBottomCell
+            let cell = tableView.dequeueReusableCell(withClass: DetailBottomCell.self, for: indexPath) as DetailBottomCell
             cell.leftLabel.text = "연령"
             cell.rightLabel.text = (detailStoreInfo?.trackContentRating).map { $0.rawValue }
             cell.arrow.alpha = 0
             cell.selectionStyle = .none
             return cell
         case (0,3):
-            let cell: DetailBottomCell = detailTableView.dequeueReusableCell(withIdentifier: bottomCellId, for: indexPath) as! DetailBottomCell
+            let cell = tableView.dequeueReusableCell(withClass: DetailBottomCell.self, for: indexPath) as DetailBottomCell
             cell.leftLabel.text = "새로운 기능"
             cell.rightLabel.text = detailStoreInfo?.version
             cell.arrow.isHighlighted = isMore
             cell.selectionStyle = .none
             return cell
         case (0,4):
-            let cell: DescriptionCell = detailTableView.dequeueReusableCell(withIdentifier: descriptionCellId, for: indexPath) as! DescriptionCell
+            let cell = tableView.dequeueReusableCell(withClass: DescriptionCell.self, for: indexPath) as DescriptionCell
             cell.descriptionLabel.text = detailStoreInfo?.releaseNotes
             cell.descriptionLabel.textColor = #colorLiteral(red: 0.5607843137, green: 0.5607843137, blue: 0.5607843137, alpha: 0.74)
             cell.descriptionLabel.textAlignment = .left
@@ -131,12 +130,12 @@ extension DetailStoreInfoViewController: UITableViewDataSource {
 
             return cell
         case (1,0):
-            let cell: DescriptionCell = detailTableView.dequeueReusableCell(withIdentifier: descriptionCellId, for: indexPath) as! DescriptionCell
+            let cell = tableView.dequeueReusableCell(withClass: DescriptionCell.self, for: indexPath) as DescriptionCell
             cell.descriptionLabel.text = detailStoreInfo?.description
             cell.selectionStyle = .none
             return cell
         case (2,0):
-            let cell: CategoryCell = detailTableView.dequeueReusableCell(withIdentifier: categoryCellId, for: indexPath) as! CategoryCell
+            let cell = tableView.dequeueReusableCell(withClass: CategoryCell.self, for: indexPath) as CategoryCell
             cell.selectionStyle = .none
          
             guard let info = detailStoreInfo else {
@@ -178,7 +177,7 @@ extension DetailStoreInfoViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let loc = detailTableView.contentOffset
+        let loc = tableView.contentOffset
         if indexPath.section == 0 && indexPath.row == 3 {
             guard
                 let storeInfo = detailStoreInfo,
@@ -186,28 +185,28 @@ extension DetailStoreInfoViewController: UITableViewDataSource {
                 return
             }
             
-            let cell = detailTableView.cellForRow(at: indexPath) as! DetailBottomCell
+            let cell = tableView.cellForRow(at: indexPath) as! DetailBottomCell
             cell.arrow.isHighlighted = !isMore
             isMore = !isMore
             UIView.setAnimationsEnabled(false)
-            detailTableView.beginUpdates()
+            tableView.beginUpdates()
             if isMore {
-                detailTableView.insertRows(at: [IndexPath(row: 4, section: 0)], with: .none)
+                tableView.insertRows(at: [IndexPath(row: 4, section: 0)], with: .none)
             } else {
-                detailTableView.deleteRows(at: [IndexPath(row: 4, section: 0)], with: .none)
+                tableView.deleteRows(at: [IndexPath(row: 4, section: 0)], with: .none)
             }
-            detailTableView.endUpdates()
+            tableView.endUpdates()
             UIView.setAnimationsEnabled(true)
             
         } else if indexPath.section == 1 && indexPath.row == 0 {
             isDescription = !isDescription
             UIView.setAnimationsEnabled(false)
-            detailTableView.beginUpdates()
-            detailTableView.reloadRows(at: [IndexPath(row: 0, section: 1)], with: .none)
-            detailTableView.endUpdates()
+            tableView.beginUpdates()
+            tableView.reloadRows(at: [IndexPath(row: 0, section: 1)], with: .none)
+            tableView.endUpdates()
             UIView.setAnimationsEnabled(true)
         }
-        detailTableView.contentOffset = loc
+        tableView.contentOffset = loc
     }
 }
 
@@ -282,7 +281,7 @@ extension DetailStoreInfoViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionCellId, for: indexPath) as! StoreCollectionCell
+        let cell = collectionView.dequeueReusableCell(withClass: StoreCollectionCell.self, for: indexPath) as StoreCollectionCell
         let resource = ImageResource(downloadURL: URL(string: detailStoreInfo?.screenshotUrls[indexPath.row] ?? "")!, cacheKey: detailStoreInfo?.screenshotUrls[indexPath.row])
         cell.storeImageView.kf.setImage(with: resource)
         return cell

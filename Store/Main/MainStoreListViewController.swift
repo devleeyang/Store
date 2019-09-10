@@ -9,37 +9,46 @@
 import UIKit
 import Kingfisher
 
-class MainListViewController: UIViewController {
-    @IBOutlet weak var storeTableView: UITableView!
-    private let listCellId = "MainListCell"
-    private let searchController = UISearchController(searchResultsController: nil)
-    private var storeList = Array<StoreInfo>()
-    override func viewDidLoad() {
-        super.viewDidLoad()
+class MainStoreListViewController: UIViewController {
+    
+    // MARK: - IBOutlet
+    @IBOutlet weak var tableView: UITableView!
+    private let listCellId = "MainListTableViewCell"
+    
+    // MARK: - Computed ProPerty
+    private lazy var searchController: UISearchController = {
+        let searchController: UISearchController = UISearchController(searchResultsController: nil)
         searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search Store"
+        searchController.searchBar.placeholder = "앱 이름 검색"
         searchController.searchBar.delegate = self
         searchController.searchBar.returnKeyType = UIReturnKeyType.done
+        return searchController
+    }()
+    
+    private var storeList = Array<StoreInfo>()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         if #available(iOS 11.0, *) {
             navigationItem.searchController = searchController
             navigationItem.hidesSearchBarWhenScrolling = false
         } else {
-            storeTableView.tableHeaderView = searchController.searchBar
+            tableView.tableHeaderView = searchController.searchBar
             searchController.hidesNavigationBarDuringPresentation = false
             navigationController?.navigationBar.isHidden = true
         }
         definesPresentationContext = true
-        
-        storeTableView.register(UINib(nibName: listCellId, bundle: nil), forCellReuseIdentifier: listCellId)
-        storeTableView.backgroundColor = #colorLiteral(red: 0.9490196078, green: 0.9490196078, blue: 0.9490196078, alpha: 0.7430436644)
-        storeTableView.separatorColor = .clear
+ 
+        tableView.register(MainStoreListTableViewCell.self)
+        tableView.backgroundColor = #colorLiteral(red: 0.9490196078, green: 0.9490196078, blue: 0.9490196078, alpha: 0.7430436644)
+        tableView.separatorColor = .clear
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         guard #available(iOS 11.0, *) else {
-            storeTableView.tableHeaderView = searchController.searchBar
+            tableView.tableHeaderView = searchController.searchBar
             searchController.hidesNavigationBarDuringPresentation = false
             navigationController?.navigationBar.isHidden = true
             return
@@ -54,13 +63,16 @@ class MainListViewController: UIViewController {
     }
 }
 
-extension MainListViewController: UITableViewDataSource {
+extension MainStoreListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return storeList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: MainListCell = storeTableView.dequeueReusableCell(withIdentifier: listCellId, for: indexPath) as! MainListCell
+//        tableView.dequeueReusableCell(withIdentifier: <#T##String#>, for: <#T##IndexPath#>)
+//        let cell: MainListTableViewCell = tableView.dequeueReusableCell(MainListTableViewCell.self, indexPath: indexPath) as! MainListTableViewCell
+        let cell = tableView.dequeueReusableCell(withClass: MainStoreListTableViewCell.self, for: indexPath) as MainStoreListTableViewCell
+     
         cell.resultStore = storeList[indexPath.row]
         cell.selectionStyle = .none
         return cell
@@ -78,14 +90,14 @@ extension MainListViewController: UITableViewDataSource {
     }
 }
 
-extension MainListViewController: UITableViewDelegate {
+extension MainStoreListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UIScreen.main.bounds.width + 115
     }
 }
 
-extension MainListViewController : UITableViewDataSourcePrefetching {
+extension MainStoreListViewController : UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         let resources = storeList.map {
             return ImageResource(downloadURL: URL(string: $0.artworkUrl512)!, cacheKey: $0.artworkUrl512)
@@ -96,10 +108,10 @@ extension MainListViewController : UITableViewDataSourcePrefetching {
 }
 
 
-extension MainListViewController: UISearchBarDelegate {
+extension MainStoreListViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         storeList.removeAll()
-        storeTableView.reloadData()
+        tableView.reloadData()
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -108,12 +120,13 @@ extension MainListViewController: UISearchBarDelegate {
             searchText.count > 0
             else {
                 storeList.removeAll()
-                storeTableView.reloadData()
+                tableView.reloadData()
                 return
         }
+        
         NetworkManager().getStore(query: searchText, onSuccess: { [weak self] in
             self?.storeList = $0
-            self?.storeTableView.reloadData()
+            self?.tableView.reloadData()
             }, onFailure: { [weak self] error in
                 self?.showErrorMesseage(msg: error.localizedDescription)
         })
