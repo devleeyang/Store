@@ -8,12 +8,17 @@
 
 import Foundation
 
-struct SearchStoreModel: Codable {
-    let resultCount: Int
-    let results: [Results]
+struct StoreListResponse: Codable {
+    let listCount: Int
+    let stores: [Store]
+    
+    enum CodingKeys: String, CodingKey {
+        case listCount = "resultCount"
+        case stores = "results"
+    }
 }
 
-struct Results: Codable {
+struct Store: Codable {
     let screenshotUrls: [String]
     let artworkUrl512: String
     let trackViewURL: String
@@ -67,4 +72,21 @@ struct StoreInfo {
     let price: Int
     let fileSizeBytes: String
     let artworkUrl512: String
+    
+    init(store: Store) {
+        self.screenshotUrls = store.screenshotUrls
+        self.trackViewUrl = store.trackViewURL
+        self.description = store.description
+        self.trackName = store.trackName
+        self.formattedPrice = store.formattedPrice
+        self.genres = store.genres
+        self.trackContentRating = store.trackContentRating
+        self.sellerName = store.sellerName
+        self.releaseNotes = store.releaseNotes
+        self.version = store.version
+        self.averageUserRating = store.averageUserRating
+        self.price = store.price
+        self.fileSizeBytes = store.fileSizeBytes
+        self.artworkUrl512 = store.artworkUrl512
+    }
 }

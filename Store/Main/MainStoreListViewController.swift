@@ -9,11 +9,9 @@
 import UIKit
 import Kingfisher
 
-class MainStoreListViewController: UIViewController {
-    
+class MainStoreListViewController: UIViewController, ViewConfiguration {
     // MARK: - IBOutlet
     @IBOutlet weak var tableView: UITableView!
-    private let listCellId = "MainListTableViewCell"
     
     // MARK: - Computed ProPerty
     private lazy var searchController: UISearchController = {
@@ -25,7 +23,18 @@ class MainStoreListViewController: UIViewController {
         return searchController
     }()
     
-    private var storeList = Array<StoreInfo>()
+    typealias ViewModelType = MainStoreListViewModel
+    var viewModel: MainStoreListViewModel = MainStoreListViewModel()
+    
+    func configure(by viewModel: MainStoreListViewModel, parameter: [AnyHashable: String]?) {
+        viewModel.didItemListLoaded = { [weak self] in
+            guard let self = self else {
+                return
+            }
+            self.tableView.reloadData()
+        }
+        viewModel.loadData(parameter: parameter)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,24 +72,24 @@ class MainStoreListViewController: UIViewController {
     }
 }
 
+
 extension MainStoreListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return storeList.count
+        return viewModel.itemListCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        tableView.dequeueReusableCell(withIdentifier: <#T##String#>, for: <#T##IndexPath#>)
-//        let cell: MainListTableViewCell = tableView.dequeueReusableCell(MainListTableViewCell.self, indexPath: indexPath) as! MainListTableViewCell
         let cell = tableView.dequeueReusableCell(withClass: MainStoreListTableViewCell.self, for: indexPath) as MainStoreListTableViewCell
      
-        cell.resultStore = storeList[indexPath.row]
+        cell.cellModel = viewModel.cellModelForRow(at: indexPath.row)
         cell.selectionStyle = .none
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let detailViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailStoreInfoViewController") as? DetailStoreInfoViewController {
-            detailViewController.detailStoreInfo = storeList[indexPath.row]
+        if let detailViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailStoreInfoViewController") as? DetailStoreInfoViewController,
+            let store = viewModel.viewModelForRow(at: indexPath.row) {
+            detailViewController.detailStoreInfo = StoreInfo(store: store)
             if let navigator = navigationController {
                 let backItem = UIBarButtonItem(title: searchController.searchBar.text, style: .plain, target: nil, action: nil)
                 navigationItem.backBarButtonItem = backItem
@@ -99,18 +108,21 @@ extension MainStoreListViewController: UITableViewDelegate {
 
 extension MainStoreListViewController : UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        let resources = storeList.map {
-            return ImageResource(downloadURL: URL(string: $0.artworkUrl512)!, cacheKey: $0.artworkUrl512)
+        let resources = viewModel.cellModelList?.map {
+            return ImageResource(downloadURL: $0.iconURL, cacheKey: $0.iconURL.description)
         }
-        let prefetcher = ImagePrefetcher(resources: resources)
-        prefetcher.start()
+        
+        if let imageResources = resources {
+            let prefetcher = ImagePrefetcher(resources: imageResources)
+            prefetcher.start()
+        }
     }
 }
 
 
 extension MainStoreListViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        storeList.removeAll()
+        viewModel.removeAll()
         tableView.reloadData()
     }
     
@@ -119,17 +131,14 @@ extension MainStoreListViewController: UISearchBarDelegate {
             let searchText = searchController.searchBar.text,
             searchText.count > 0
             else {
-                storeList.removeAll()
+                viewModel.removeAll()
                 tableView.reloadData()
                 return
         }
-        
-        NetworkManager().getStore(query: searchText, onSuccess: { [weak self] in
-            self?.storeList = $0
-            self?.tableView.reloadData()
-            }, onFailure: { [weak self] error in
-                self?.showErrorMesseage(msg: error.localizedDescription)
-        })
+        let parameter: [AnyHashable: String] = [ "term": searchText,
+                                                 "country": "kr",
+                                                 "media": "software" ]
+        configure(by: viewModel, parameter: parameter)
     }
 }
 

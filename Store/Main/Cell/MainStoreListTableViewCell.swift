@@ -12,17 +12,18 @@ import Kingfisher
 
 class MainStoreListTableViewCell: UITableViewCell {
 
-    var resultStore: StoreInfo? {
+    var cellModel: MainStoreCellModel? {
         didSet {
-            if let store = resultStore {
-                let resource = ImageResource(downloadURL: URL(string: store.artworkUrl512)!, cacheKey: store.artworkUrl512)
-                appIcon.kf.setImage(with: resource)
-                appName.text = store.trackName
-                companyName.text = store.sellerName
-                category.text = store.genres.first
-                price.text = "\(store.formattedPrice.rawValue)"
-                starView.current = CGFloat(store.averageUserRating ?? 0)
+            guard let data = cellModel else {
+                return
             }
+            appName.text = data.name
+            companyName.text = data.company
+            category.text = data.category
+            price.text = data.price
+            starView.current = CGFloat(data.averageRating)
+            let resource = ImageResource(downloadURL: data.iconURL, cacheKey: data.iconURL.description)
+            appIcon.kf.setImage(with: resource)
         }
     }
     
@@ -68,7 +69,7 @@ class MainStoreListTableViewCell: UITableViewCell {
                                             fillImage: nil)
         starView.configure(attribute, current: 0, max: 5)
         
-        self.backgroundColor = .clear
+        backgroundColor = .clear
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
