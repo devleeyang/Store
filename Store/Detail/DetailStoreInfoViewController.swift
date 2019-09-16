@@ -16,12 +16,12 @@ class DetailStoreInfoViewController: UIViewController {
     private let collectionCellId = "StoreCollectionCell"
     private var isMore: Bool = false
     private var isDescription: Bool = false
-    private var inputList: Array<CategoryLabel> = Array<CategoryLabel>()
+    private var inputList: [CategoryLabel] = [CategoryLabel]()
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let cellTypes: [UITableViewCell.Type] = [ DetailMainCell.self,
+        let cellTypes: [UITableViewCell.Type] = [ DetailMainTopInfoCell.self,
                   DetailBottomCell.self,
                   DescriptionCell.self,
                   CategoryCell.self ]
@@ -29,8 +29,7 @@ class DetailStoreInfoViewController: UIViewController {
         tableView.registers(cellTypes)
         tableView.backgroundColor = #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
         tableView.separatorColor = .clear
-        tableView.bounces = false
-        
+
         guard #available(iOS 11.0, *) else {
             navigationController?.navigationBar.isHidden = false
             return
@@ -83,7 +82,7 @@ extension DetailStoreInfoViewController: UITableViewDataSource {
         let index = (indexPath.section, indexPath.row)
         switch index {
         case (0,0):
-            let cell = tableView.dequeueReusableCell(withClass: DetailMainCell.self, for: indexPath) as DetailMainCell
+            let cell = tableView.dequeueReusableCell(withClass: DetailMainTopInfoCell.self, for: indexPath) as DetailMainTopInfoCell
             cell.datailStore = detailStoreInfo
             cell.imageCollection.dataSource = self
             cell.imageCollection.register(StoreCollectionCell.self)
@@ -188,23 +187,19 @@ extension DetailStoreInfoViewController: UITableViewDataSource {
             let cell = tableView.cellForRow(at: indexPath) as! DetailBottomCell
             cell.arrow.isHighlighted = !isMore
             isMore = !isMore
-            UIView.setAnimationsEnabled(false)
             tableView.beginUpdates()
             if isMore {
-                tableView.insertRows(at: [IndexPath(row: 4, section: 0)], with: .none)
+                tableView.insertRows(at: [IndexPath(row: 4, section: 0)], with: .top)
             } else {
-                tableView.deleteRows(at: [IndexPath(row: 4, section: 0)], with: .none)
+                tableView.deleteRows(at: [IndexPath(row: 4, section: 0)], with: .top)
             }
             tableView.endUpdates()
-            UIView.setAnimationsEnabled(true)
             
         } else if indexPath.section == 1 && indexPath.row == 0 {
             isDescription = !isDescription
-            UIView.setAnimationsEnabled(false)
             tableView.beginUpdates()
             tableView.reloadRows(at: [IndexPath(row: 0, section: 1)], with: .none)
             tableView.endUpdates()
-            UIView.setAnimationsEnabled(true)
         }
         tableView.contentOffset = loc
     }
@@ -212,11 +207,11 @@ extension DetailStoreInfoViewController: UITableViewDataSource {
 
 extension DetailStoreInfoViewController: UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         guard let storeInfo = detailStoreInfo else {
             return 0
         }
-        
+
         let index = (indexPath.section, indexPath.row)
         switch index {
         case (0,0):
@@ -227,7 +222,7 @@ extension DetailStoreInfoViewController: UITableViewDelegate {
             guard let note = storeInfo.releaseNotes else {
                 return 0
             }
-            
+
             let height = isMore ? note.height(withFontSize: 16) + 26 : 0
             return height
         case (1,0):
@@ -236,7 +231,37 @@ extension DetailStoreInfoViewController: UITableViewDelegate {
             let height = isDescription ? minHeight : finalHeight
             return height
         case (2,0):
+            return  100.0
+        default:
             return UITableView.automaticDimension
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        guard let storeInfo = detailStoreInfo else {
+            return 0
+        }
+
+        let index = (indexPath.section, indexPath.row)
+        switch index {
+        case (0,0):
+            return storeInfo.sellerName.height(withFontSize: 17) + storeInfo.trackName.height(withFontSize: 21) + 397
+        case (0,1),(0,2),(0,3):
+            return storeInfo.trackContentRating.rawValue.height(withFontSize: 15) + 20
+        case (0,4):
+            guard let note = storeInfo.releaseNotes else {
+                return 0
+            }
+
+            let height = isMore ? note.height(withFontSize: 16) + 26 : 0
+            return height
+        case (1,0):
+            let minHeight = storeInfo.description.height(withFontSize: 15) + 20
+            let finalHeight = minHeight > 200 ? 200 : minHeight
+            let height = isDescription ? minHeight : finalHeight
+            return height
+        case (2,0):
+            return 100.0
         default:
             return UITableView.automaticDimension
         }
