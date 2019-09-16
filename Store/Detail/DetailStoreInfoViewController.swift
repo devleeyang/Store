@@ -21,7 +21,7 @@ class DetailStoreInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let cellTypes: [UITableViewCell.Type] = [ DetailMainTopInfoCell.self,
+        let cellTypes: [UITableViewCell.Type] = [ DetailMainCell.self,
                   DetailBottomCell.self,
                   DescriptionCell.self,
                   CategoryCell.self ]
@@ -82,7 +82,7 @@ extension DetailStoreInfoViewController: UITableViewDataSource {
         let index = (indexPath.section, indexPath.row)
         switch index {
         case (0,0):
-            let cell = tableView.dequeueReusableCell(withClass: DetailMainTopInfoCell.self, for: indexPath) as DetailMainTopInfoCell
+            let cell = tableView.dequeueReusableCell(withClass: DetailMainCell.self, for: indexPath) as DetailMainCell
             cell.datailStore = detailStoreInfo
             cell.imageCollection.dataSource = self
             cell.imageCollection.register(StoreCollectionCell.self)
