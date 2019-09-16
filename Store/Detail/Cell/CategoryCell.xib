@@ -1,50 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CategoryCell" rowHeight="75" id="KGk-i7-Jjw" customClass="CategoryCell" customModule="Store" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="336" height="75"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CategoryCell" rowHeight="108" id="KGk-i7-Jjw" customClass="CategoryCell" customModule="Store" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="347" height="108"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="336" height="74.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="347" height="107.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U4P-KL-G5q">
-                        <rect key="frame" x="0.0" y="0.0" width="336" height="74.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="347" height="107.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="카테고리" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hmA-zf-MPW">
-                                <rect key="frame" x="10" y="10" width="316" height="21"/>
+                                <rect key="frame" x="10" y="10" width="327" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZlH-Wl-O9E">
-                                <rect key="frame" x="10" y="41" width="316" height="23.5"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Ies-It-ljG">
+                                <rect key="frame" x="10" y="35" width="327" height="62.5"/>
+                                <color key="backgroundColor" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" priority="250" constant="40.5" id="I6X-1C-wtY"/>
+                                    <constraint firstAttribute="height" constant="62.5" id="NCR-pF-S9D"/>
                                 </constraints>
-                            </view>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="vV6-Rk-3bY">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <connections>
+                                    <outlet property="dataSource" destination="KGk-i7-Jjw" id="7SW-ms-qa7"/>
+                                    <outlet property="delegate" destination="KGk-i7-Jjw" id="Fht-iO-wmy"/>
+                                </connections>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="ZlH-Wl-O9E" firstAttribute="leading" secondItem="U4P-KL-G5q" secondAttribute="leading" constant="10" id="93R-iR-Vrw"/>
+                            <constraint firstAttribute="bottom" secondItem="Ies-It-ljG" secondAttribute="bottom" constant="10" id="02D-sr-Dae"/>
+                            <constraint firstAttribute="trailing" secondItem="Ies-It-ljG" secondAttribute="trailing" constant="10" id="8ei-hl-cTx"/>
                             <constraint firstAttribute="trailing" secondItem="hmA-zf-MPW" secondAttribute="trailing" constant="10" id="DkD-BS-D1p"/>
                             <constraint firstItem="hmA-zf-MPW" firstAttribute="top" secondItem="U4P-KL-G5q" secondAttribute="top" constant="10" id="KZE-Pj-6Pc"/>
-                            <constraint firstAttribute="bottom" secondItem="ZlH-Wl-O9E" secondAttribute="bottom" constant="10" id="RWG-PR-6tR"/>
+                            <constraint firstItem="Ies-It-ljG" firstAttribute="leading" secondItem="U4P-KL-G5q" secondAttribute="leading" constant="10" id="OQ0-WP-wWb"/>
+                            <constraint firstItem="Ies-It-ljG" firstAttribute="top" secondItem="hmA-zf-MPW" secondAttribute="bottom" constant="4" id="Pna-4N-TKy"/>
                             <constraint firstItem="hmA-zf-MPW" firstAttribute="leading" secondItem="U4P-KL-G5q" secondAttribute="leading" constant="10" id="SUd-xG-4qO"/>
-                            <constraint firstItem="ZlH-Wl-O9E" firstAttribute="top" secondItem="hmA-zf-MPW" secondAttribute="bottom" constant="10" id="bfd-oc-PRC"/>
-                            <constraint firstAttribute="trailing" secondItem="ZlH-Wl-O9E" secondAttribute="trailing" constant="10" id="qLJ-qC-5fm"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -57,10 +67,9 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="labelHeight" destination="I6X-1C-wtY" id="uy1-lf-VF3"/>
-                <outlet property="labelViews" destination="ZlH-Wl-O9E" id="IX1-VD-DCO"/>
+                <outlet property="categoryCollectionCell" destination="Ies-It-ljG" id="4Vg-5F-XMU"/>
             </connections>
-            <point key="canvasLocation" x="145.59999999999999" y="141.67916041979012"/>
+            <point key="canvasLocation" x="128.80000000000001" y="149.32533733133434"/>
         </tableViewCell>
     </objects>
 </document>

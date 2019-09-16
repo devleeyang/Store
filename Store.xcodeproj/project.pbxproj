@@ -50,6 +50,8 @@
 		EECFF1262286D03300CC0DE6 /* DataLoadError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECFF1252286D03300CC0DE6 /* DataLoadError.swift */; };
 		EECFF1572287292700CC0DE6 /* MainStoreListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECFF1562287292700CC0DE6 /* MainStoreListViewController.swift */; };
 		EECFF15C22872A3600CC0DE6 /* MainStoreListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECFF15A22872A3600CC0DE6 /* MainStoreListTableViewCell.swift */; };
+		EED490F6232F97C400CE5218 /* CategoryLabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED490F4232F97C400CE5218 /* CategoryLabelCell.swift */; };
+		EED490F7232F97C400CE5218 /* CategoryLabelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EED490F5232F97C400CE5218 /* CategoryLabelCell.xib */; };
 		EEE69E1B2327785A005730E6 /* Register+ColletionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE69E1A2327785A005730E6 /* Register+ColletionView.swift */; };
 /* End PBXBuildFile section */
 
@@ -112,6 +114,8 @@
 		EECFF1562287292700CC0DE6 /* MainStoreListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainStoreListViewController.swift; sourceTree = "<group>"; };
 		EECFF15A22872A3600CC0DE6 /* MainStoreListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainStoreListTableViewCell.swift; sourceTree = "<group>"; };
 		EECFF15B22872A3600CC0DE6 /* MainStoreListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainStoreListTableViewCell.xib; sourceTree = "<group>"; };
+		EED490F4232F97C400CE5218 /* CategoryLabelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryLabelCell.swift; sourceTree = "<group>"; };
+		EED490F5232F97C400CE5218 /* CategoryLabelCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryLabelCell.xib; sourceTree = "<group>"; };
 		EEE69E1A2327785A005730E6 /* Register+ColletionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Register+ColletionView.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -230,6 +234,8 @@
 				EE83E34D2287F35F00CAADB0 /* CategoryCell.xib */,
 				EE83E3592288272100CAADB0 /* StoreCollectionCell.swift */,
 				EE83E35A2288272100CAADB0 /* StoreCollectionCell.xib */,
+				EED490F4232F97C400CE5218 /* CategoryLabelCell.swift */,
+				EED490F5232F97C400CE5218 /* CategoryLabelCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -362,6 +368,7 @@
 				EECFF10D22869A8700CC0DE6 /* LaunchScreen.storyboard in Resources */,
 				EE83E3442287E70100CAADB0 /* DetailBottomCell.xib in Resources */,
 				EECFF10A22869A8700CC0DE6 /* Assets.xcassets in Resources */,
+				EED490F7232F97C400CE5218 /* CategoryLabelCell.xib in Resources */,
 				EECFF10822869A8500CC0DE6 /* Main.storyboard in Resources */,
 				EE83E34B2287F0A600CAADB0 /* DescriptionCell.xib in Resources */,
 				EEA2707C228730CC00ED7F23 /* DetailMainCell.xib in Resources */,
@@ -413,6 +420,7 @@
 				EECFF1262286D03300CC0DE6 /* DataLoadError.swift in Sources */,
 				CDF5FBFF228BB5E8005DD017 /* String+height.swift in Sources */,
 				EECFF1242286BBBF00CC0DE6 /* StoreListResponse.swift in Sources */,
+				EED490F6232F97C400CE5218 /* CategoryLabelCell.swift in Sources */,
 				EECFF1572287292700CC0DE6 /* MainStoreListViewController.swift in Sources */,
 				EE83E35422881CBF00CAADB0 /* UIView+Round.swift in Sources */,
 				EE4DCC7E232BD77B005321C8 /* ViewConfiguration.swift in Sources */,

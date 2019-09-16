@@ -16,7 +16,6 @@ class DetailMainCell: UITableViewCell {
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var webBtn: UIButton!
     @IBOutlet weak var shareBtn: UIButton!
-    @IBOutlet weak var buttonBackView: UIView!
     
     var datailStore: StoreInfo? {
         didSet {
@@ -48,10 +47,7 @@ class DetailMainCell: UITableViewCell {
         
         priceLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         priceLabel.font = .boldSystemFont(ofSize: 18.0)
-        
-        buttonBackView.layer.borderWidth = 1.0
-        buttonBackView.layer.borderColor = #colorLiteral(red: 0.631372549, green: 0.631372549, blue: 0.631372549, alpha: 0.74).cgColor
-        buttonBackView.layer.cornerRadius = 4
+    
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

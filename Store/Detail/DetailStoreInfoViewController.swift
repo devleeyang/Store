@@ -17,6 +17,7 @@ class DetailStoreInfoViewController: UIViewController {
     private var isMore: Bool = false
     private var isDescription: Bool = false
     private var inputList: [CategoryLabel] = [CategoryLabel]()
+    private var heightDictionary: [IndexPath: CGFloat] = [IndexPath: CGFloat]()
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +30,7 @@ class DetailStoreInfoViewController: UIViewController {
         tableView.registers(cellTypes)
         tableView.backgroundColor = #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
         tableView.separatorColor = .clear
+        tableView.estimatedRowHeight = 400.0
 
         guard #available(iOS 11.0, *) else {
             navigationController?.navigationBar.isHidden = false
@@ -67,7 +69,7 @@ extension DetailStoreInfoViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            let count = isMore ? 5: 4
+            let count = isMore ? 5 : 4
             return count
         case 1:
             return 1
@@ -122,10 +124,6 @@ extension DetailStoreInfoViewController: UITableViewDataSource {
             cell.descriptionLabel.textAlignment = .left
             cell.descriptionLabel.backgroundColor = #colorLiteral(red: 0.8980392157, green: 0.8980392157, blue: 0.8980392157, alpha: 0.74)
             cell.selectionStyle = .none
-            cell.topView.backgroundColor = #colorLiteral(red: 0.8980392157, green: 0.8980392157, blue: 0.8980392157, alpha: 0.74)
-            cell.topView.alpha = 1
-            cell.bottomView.backgroundColor = #colorLiteral(red: 0.8980392157, green: 0.8980392157, blue: 0.8980392157, alpha: 0.74)
-            cell.bottomView.alpha = 1
 
             return cell
         case (1,0):
@@ -140,33 +138,35 @@ extension DetailStoreInfoViewController: UITableViewDataSource {
             guard let info = detailStoreInfo else {
                 return cell
             }
-            inputList.removeAll()
-            for text in info.genres {
-                let label: CategoryLabel = CategoryLabel()
-                label.text = "#\(text)"
-                label.sizeToFit()
-                label.frame = CGRect(x: label.frame.origin.x, y: label.frame.origin.y, width: label.frame.size.width + 10, height: label.frame.size.height + 10)
-                
-                if inputList.count == 0 {
-                    label.frame.origin = CGPoint(x: 10, y: 0)
-                } else {
-                    let labelX = inputList[inputList.count - 1].frame.origin.x + inputList[inputList.count - 1].frame.width + 8
-                    if (cell.labelViews.frame.size.width < labelX + label.frame.size.width)
-                    {
-                        label.frame.origin.x = cell.labelViews.frame.origin.x
-                        label.frame.origin.y = inputList[inputList.count - 1].frame.origin.y + inputList[inputList.count - 1].frame.height + 8
-                    } else {
-                        label.frame.origin.x = labelX
-                        label.frame.origin.y = inputList[inputList.count - 1].frame.origin.y
-                    }
-                }
-                
-                let labelY = label.frame.origin.y + label.frame.size.height + 20
-                cell.labelHeight.constant = labelY
-                cell.labelViews.updateConstraints()
-                cell.labelViews.addSubview(label)
-                inputList.append(label)
-            }
+            cell.genres = info.genres
+            
+//            inputList.removeAll()
+//            for text in info.genres {
+//                let label: CategoryLabel = CategoryLabel()
+//                label.text = "#\(text)"
+//                label.sizeToFit()
+//                label.frame = CGRect(x: label.frame.origin.x, y: label.frame.origin.y, width: label.frame.size.width + 10, height: label.frame.size.height + 10)
+//
+//                if inputList.count == 0 {
+//                    label.frame.origin = CGPoint(x: 10, y: 0)
+//                } else {
+//                    let labelX = inputList[inputList.count - 1].frame.origin.x + inputList[inputList.count - 1].frame.width + 8
+//                    if (cell.labelViews.frame.size.width < labelX + label.frame.size.width)
+//                    {
+//                        label.frame.origin.x = cell.labelViews.frame.origin.x
+//                        label.frame.origin.y = inputList[inputList.count - 1].frame.origin.y + inputList[inputList.count - 1].frame.height + 8
+//                    } else {
+//                        label.frame.origin.x = labelX
+//                        label.frame.origin.y = inputList[inputList.count - 1].frame.origin.y
+//                    }
+//                }
+//
+//                let labelY = label.frame.origin.y + label.frame.size.height + 20
+//                cell.labelHeight.constant = labelY
+//                cell.labelViews.updateConstraints()
+//                cell.labelViews.addSubview(label)
+//                inputList.append(label)
+//            }
             
             return cell
         default:
@@ -206,7 +206,7 @@ extension DetailStoreInfoViewController: UITableViewDataSource {
 }
 
 extension DetailStoreInfoViewController: UITableViewDelegate {
-    
+    /*
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         guard let storeInfo = detailStoreInfo else {
             return 0
@@ -266,38 +266,56 @@ extension DetailStoreInfoViewController: UITableViewDelegate {
             return UITableView.automaticDimension
         }
     }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if (section == 2) {
-            return 20
+     */
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        guard detailStoreInfo != nil else {
+            return 0
         }
+        
+        if let height = heightDictionary[indexPath] {
+            return height
+        } else {
+            return UITableView.automaticDimension
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let height = cell.frame.size.height.native
+        heightDictionary.updateValue(CGFloat(height), forKey: indexPath)
+    }
+
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        if (section == 2) {
+//            return 20
+//        }
         return CGFloat.leastNonzeroMagnitude
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if (section == 2) {
-            return 20
-        }
+//        if (section == 2) {
+//            return 20
+//        }
         return CGFloat.leastNonzeroMagnitude
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if (section == 2) {
-            let headerView: UIView = UIView()
-            headerView.backgroundColor = #colorLiteral(red: 0.9490196078, green: 0.9490196078, blue: 0.9490196078, alpha: 0.74)
-            return headerView
-        }
-        return nil
-    }
-
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        if (section == 2) {
-            let footerView: UIView = UIView()
-            footerView.backgroundColor = #colorLiteral(red: 0.9490196078, green: 0.9490196078, blue: 0.9490196078, alpha: 0.74)
-            return footerView
-        }
-        return nil
-    }
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        if (section == 2) {
+//            let headerView: UIView = UIView()
+//            headerView.backgroundColor = #colorLiteral(red: 0.9490196078, green: 0.9490196078, blue: 0.9490196078, alpha: 0.74)
+//            return headerView
+//        }
+//        return nil
+//    }
+//
+//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+//        if (section == 2) {
+//            let footerView: UIView = UIView()
+//            footerView.backgroundColor = #colorLiteral(red: 0.9490196078, green: 0.9490196078, blue: 0.9490196078, alpha: 0.74)
+//            return footerView
+//        }
+//        return nil
+//    }
 }
 
 extension DetailStoreInfoViewController: UICollectionViewDataSource {
@@ -306,6 +324,7 @@ extension DetailStoreInfoViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        print("collectionView: \(collectionView)")
         let cell = collectionView.dequeueReusableCell(withClass: StoreCollectionCell.self, for: indexPath) as StoreCollectionCell
         let resource = ImageResource(downloadURL: URL(string: detailStoreInfo?.screenshotUrls[indexPath.row] ?? "")!, cacheKey: detailStoreInfo?.screenshotUrls[indexPath.row])
         cell.storeImageView.kf.setImage(with: resource)
